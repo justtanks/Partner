@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_mainbutton"
+    >
+    <TextView
+        android:id="@+id/item_choisecad_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray1"
+        android:textSize="15sp"
+        android:layout_marginTop="19dp"
+        android:layout_marginStart="15dp"
+        android:text="德州银行"
+
+        />
+    <TextView
+        android:id="@+id/item_choisecar_linetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_choisecad_name"
+        android:layout_alignStart="@id/item_choisecad_name"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/gray3"
+        android:text="提现到收取手续费1%"
+        />
+    <ImageView
+        android:id="@+id/item_choisecard_duihao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+        android:src="@mipmap/choisecard_duihao"
+
+        />
+
+</RelativeLayout>

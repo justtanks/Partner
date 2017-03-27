@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data >
+        <variable
+            name="yesdayorder"
+            type="com.ts.partner.partnerBean.netBean.LoginBean.DataBean.PartnerYesterdayOrderBean"></variable>
+        <variable
+            name="base"
+            type="com.ts.partner.partnerBase.BaseData"></variable>
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/order_itemback">
+
+        <ImageView
+            android:id="@+id/itemyestoday_head"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:image="@{base.BASEURL+yesdayorder.order_pic}" />
+
+        <TextView
+            android:id="@+id/itemyestoday_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/itemyestoday_head"
+            android:text="商标名称:"
+            android:textColor="@color/gray2"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/itemyestoday_zizhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemyestoday_name"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/itemyestoday_head"
+            android:text="申请资质:"
+            android:textColor="@color/gray3"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/itemyestoday_allmoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemyestoday_zizhi"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/itemyestoday_head"
+            android:text="费用总计:"
+            android:textColor="@color/gray3"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/itemyestoday_name"
+            android:text="@{yesdayorder.order_name}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemyestoday_name"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/itemyestoday_zizhi"
+            android:text="@{yesdayorder.order_qiye_name==null?`个人注册`:`企业注册`}"
+            android:textColor="@color/gray3"
+            android:textSize="13sp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemyestoday_zizhi"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/itemyestoday_allmoney"
+            android:text="@{yesdayorder.order_price}"
+            android:textColor="@color/gray3"
+            android:textSize="13sp"
+
+            />
+
+        <TextView
+            android:id="@+id/itemyestoday_shouyi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/itemyestoday_zizhi"
+            android:layout_marginEnd="13dp"
+            android:text="@{yesdayorder.order_price}"
+            android:textColor="@color/titiletextcolor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/itemyestoday_zizhi"
+            android:layout_marginEnd="10dp"
+            android:layout_toLeftOf="@id/itemyestoday_shouyi"
+            android:text="@string/shouyi"
+            android:textColor="@color/titiletextcolor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/itemyestoday_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemyestoday_head"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/service"
+            android:textColor="@color/gray2"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/itemyestoday_content"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@{yesdayorder.order_types}"
+            android:maxLines="1"
+            android:textColor="@color/gray2"
+            android:textSize="13sp"
+            android:layout_below="@id/itemyestoday_head"
+            android:layout_toRightOf="@id/itemyestoday_service"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/itemyestoday_content"
+            android:layout_below="@id/itemyestoday_head"
+            android:layout_marginTop="15dp"
+            android:text="...."
+            />
+
+    </RelativeLayout>
+</layout>

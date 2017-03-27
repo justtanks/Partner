@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="MineFragmentBinding">
+        <variable
+            name="minedatas"
+            type="com.ts.partner.partnerBean.BendingBean.ShowMsgInMineBean"></variable>
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_mine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/write"
+        android:orientation="vertical"
+       >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@mipmap/mine_back">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal">
+
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/mine_back"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="match_parent">-->
+
+                    <!--<ImageView-->
+
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentStart="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginStart="20dp"-->
+                        <!--android:src="@mipmap/mine_fanhui" />-->
+                <!--</RelativeLayout>-->
+
+                <RelativeLayout
+                    android:id="@+id/mine_setting"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:src="@mipmap/mine_settomg" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/mine_touxiang" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <TextView
+                android:id="@+id/mine_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@{minedatas.name.equals(`null`)?``:minedatas.name}"
+                android:textColor="@color/gray1"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="7dp"
+                android:layout_toRightOf="@id/mine_username"
+                android:src="@mipmap/mine_parter" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="喜欢的格言"
+                android:textColor="@color/yellow_ffdcoo"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mine_mycard"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/selector_mainbutton">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/mine_mycard"
+                android:textColor="@color/gray1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toLeftOf="@+id/mine_scross"
+                android:text="@{minedatas.carNum}"
+                android:textColor="@color/gray3"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/mine_scross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:src="@mipmap/mine_go" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mine_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:text="@string/phone"
+                android:textColor="@color/gray1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:text="@{minedatas.phone==null?``:minedatas.phone}"
+                android:textColor="@color/gray3"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mine_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:text="@string/area"
+                android:textColor="@color/gray1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:text="@{minedatas.location}"
+                android:textColor="@color/gray3"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="TuiguangBinding">
+
+    </data>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/tuiguang_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/tuiguang_title"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/qiangdan_toptabtex_notselect"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/tuiguang"
+                android:textColor="@color/main_tixianbutton"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/login_back_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/fanhui"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/tuiguang_back"
+            android:layout_below="@id/tuiguang_title"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            >
+            <ListView
+                android:id="@+id/tuiguang_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                ></ListView>
+        </RelativeLayout>
+
+    </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</layout>

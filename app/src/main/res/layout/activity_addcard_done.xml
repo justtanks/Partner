@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_addcard_done"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ts.partner.partnerActivity.AddcardDoneActivity">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/write"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="14sp"
+        android:textColor="@color/gray1"
+         android:text="@string/add_card"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/carddone_complete"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="0dp"
+        android:src="@mipmap/done_line"
+        />
+    <!--<TextView-->
+        <!--android:id="@+id/carddone_complete"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:textSize="14sp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginEnd="25dp"-->
+        <!--android:text="@string/done"-->
+        <!--android:gravity="center"-->
+
+        <!--android:textColor="@color/done_yellow"-->
+        <!--/>-->
+     <Button
+         android:id="@+id/carddone_complete"
+         android:layout_width="100dp"
+         android:layout_height="match_parent"
+         android:layout_alignParentEnd="true"
+         android:background="@color/write"
+         android:text="@string/done"
+         android:textSize="14sp"
+         android:textColor="@color/done_yellow"
+         />
+
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgray"
+        >
+        <ImageView
+            android:id="@+id/addcard_doneimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/done_done"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addcard_done"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/done_yellow"
+            android:textSize="14sp"
+            android:layout_below="@id/addcard_doneimage"
+            />
+    </RelativeLayout>
+</LinearLayout>

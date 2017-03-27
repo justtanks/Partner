@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data class="AddcardBinding">
+
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_addcard_step1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backgray"
+    tools:context="com.ts.partner.partnerActivity.AddcardStep1Activity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/zhucecolortitle"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/step1_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/addcard_fanhui"
+            android:layout_marginStart="15dp"
+
+            />
+        <TextView
+            android:id="@+id/step1_back2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+             android:layout_toRightOf="@id/step1_back"
+            android:textColor="@color/yello_701585"
+            android:layout_marginStart="7dp"
+            android:textSize="14sp"
+            android:text="@string/add_card"
+            />
+        <RelativeLayout
+            android:id="@+id/addcard_step1_help"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            ></RelativeLayout>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/addcard_help"
+            android:layout_marginEnd="15dp"
+
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/step1_bangdingkahao"
+            android:layout_marginStart="15dp"
+            android:textSize="14dp"
+            android:textColor="@color/gray3"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/write"
+        >
+        <TextView
+            android:id="@+id/chikarentitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/gray1"
+             android:textSize="14sp"
+            android:text="@string/step_chikaren"
+            />
+        <EditText
+            android:id="@+id/addcar_step1_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/chikarentitle"
+            android:layout_marginStart="80dp"
+            android:textSize="14sp"
+            android:background="@null"
+            android:textColor="@color/gray3"
+            android:hint="@string/name"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/write"
+        >
+        <TextView
+            android:id="@+id/kahaotitile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/yinhangkahao"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/gray1"
+            android:maxLines="1"
+            android:textSize="14sp"
+
+
+            />
+        <EditText
+            android:id="@+id/addcard_step1_cardnum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/kahaotitile"
+            android:hint="@string/yinhangka"
+            android:layout_marginStart="80dp"
+            android:textColor="@color/gray3"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:maxLines="1"
+            android:background="@null"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/touming"
+        >
+        <Button
+            android:id="@+id/addcard_nextstep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:enabled="false"
+            android:background="@mipmap/addcard_next_moren"
+            />
+
+    </RelativeLayout>
+</LinearLayout>
+</layout>

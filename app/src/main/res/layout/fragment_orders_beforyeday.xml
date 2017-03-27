@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data class="BeforedayBinding">
+        <variable
+            name="datas"
+            type="com.ts.partner.partnerBean.BendingBean.DatasInMain"></variable>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:background="@color/write"
+            >
+            <TextView
+                android:id="@+id/before_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/gray2"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="16dp"
+                android:text="@{datas.beforyedaytime}"
+                />
+            <TextView
+                android:id="@+id/before_danshu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/gray2"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/before_time"
+                android:text="@string/num_order"
+                />
+            <TextView
+                android:id="@+id/before_shouyi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/before_time"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/gray2"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="15dp"
+                android:text="@string/shouyi"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@{datas.beyesdayOrderCount+`人`}"
+                android:textColor="@color/color_ff0000"
+                android:layout_toRightOf="@id/before_danshu"
+                android:layout_alignTop="@id/before_danshu"
+                android:layout_marginStart="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@{datas.beyesdayOrderCount.equals(`0`)?`0`:datas.beyesdayMoney+`元`}"
+                android:textColor="@color/color_ff0000"
+                android:layout_toRightOf="@id/before_shouyi"
+                android:layout_alignTop="@id/before_shouyi"
+                android:layout_marginStart="10dp"
+                />
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/order_longline"
+            />
+
+        <ListView
+            android:id="@+id/before_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            ></ListView>
+    </LinearLayout>
+</layout>

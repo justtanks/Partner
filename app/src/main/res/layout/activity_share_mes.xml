@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data class="ShareMsgBinding">
+
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_share_msg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.ts.partner.partnerActivity.AgreeMentActivity">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/zhucecolortitle"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+            <RelativeLayout
+                android:id="@+id/share_reback"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"></RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/addcard_fanhui"
+                android:layout_marginStart="15dp"
+
+                />
+            <TextView
+                android:id="@+id/share_sharebt"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:textColor="@color/yello_701585"
+                android:layout_alignParentEnd="true"
+                android:textSize="18sp"
+                android:text="@string/share"
+                />
+        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/share_progress"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            
+            android:indeterminateOnly="false"
+            android:max="100"
+            />
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data class="CardBinding">
+
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ts.partner.partnerActivity.CardActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/zhucecolortitle"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/card_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/addcard_fanhui"
+            android:layout_marginStart="15dp"
+
+            />
+        <TextView
+            android:id="@+id/card_backtext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/card_back"
+            android:textColor="@color/yello_701585"
+            android:layout_marginStart="7dp"
+            android:textSize="14sp"
+            android:text="@string/mybandcard"
+            />
+        <RelativeLayout
+            android:id="@+id/card_addnewcard"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/addcard_add"
+                android:layout_marginEnd="15dp"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <ListView
+
+        android:id="@+id/card_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="14dp"
+        android:scrollbars="none"
+        android:divider="#00000000"
+        android:dividerHeight="2dp"
+        ></ListView>
+
+</LinearLayout>
+</layout>
