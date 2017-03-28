@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.common.collect.EvictingQueue;
 import com.ts.partner.R;
 import com.ts.partner.databinding.MineFragmentBinding;
 import com.ts.partner.partnerActivity.CardActivity;

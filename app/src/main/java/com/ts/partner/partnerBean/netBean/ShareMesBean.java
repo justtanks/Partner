@@ -1,7 +1,5 @@
 package com.ts.partner.partnerBean.netBean;
 
-import org.antlr.v4.codegen.model.SrcOp;
-
 import java.io.Serializable;
 import java.util.List;
 

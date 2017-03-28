@@ -3,8 +3,7 @@ package com.ts.partner.partnerActivity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.parser.BindingExpressionParser;
-import android.os.Bundle;
+ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.ts.partner.partnerUtils.BankUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-import kotlin.collections.IndexingIterable;
+
 
 /*
    添加银行卡第一步的activity
