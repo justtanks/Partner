@@ -145,7 +145,34 @@
                 android:layout_marginEnd="20dp"
                 android:src="@mipmap/mine_go" />
         </RelativeLayout>
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mine_line" />
+       <RelativeLayout
+           android:id="@+id/mine_dailiren"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/selector_mainbutton"
+           >
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentStart="true"
+               android:layout_centerVertical="true"
+               android:layout_marginBottom="10dp"
+               android:layout_marginStart="20dp"
+               android:text="@string/dailiren"
+               android:textColor="@color/gray1"
+               android:textSize="14sp" />
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentEnd="true"
+               android:layout_centerVertical="true"
+               android:layout_marginEnd="20dp"
+               android:src="@mipmap/mine_go" />
+       </RelativeLayout>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

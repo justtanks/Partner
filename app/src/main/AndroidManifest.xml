@@ -32,9 +32,9 @@
         <activity android:name=".partnerActivity.PhoneTestActivity" />
         <activity android:name=".partnerActivity.AddcardDoneActivity" />
         <activity android:name=".partnerActivity.DrawCashActivity" />
-        <activity android:name=".partnerActivity.ChoiseCardActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name=".partnerActivity.ChoiseCardActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".partnerActivity.AddCardInputPassWorldActivity" />
         <activity
             android:name=".partnerActivity.AddpassWordActivity"
@@ -85,7 +85,8 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".partnerActivity.ShareMesActivity"></activity>
+        <activity android:name=".partnerActivity.ShareMesActivity" />
+        <activity android:name=".partnerActivity.WaiterListActivity"></activity>
     </application>
 
 </manifest>

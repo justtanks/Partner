@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,7 +39,7 @@ import static android.R.attr.data;
  * home
  */
 
-public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnShareMsgChangeListener ,View.OnClickListener{
+public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnShareMsgChangeListener ,View.OnClickListener {
     HomeActivity activity;
     TuiguangBinding b;
     private static ShareMesBean datas = new ShareMesBean();
@@ -99,12 +100,12 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void onMsgChange(ShareMesBean datas) {
-        if(datas!=null){
+        if (datas != null) {
             adapter.setDatas(datas.getMsg());
             b.tuiguangRefresh.setRefreshing(false);
             toast(getString(R.string.gengxinchenggong)
             );
-        }else {
+        } else {
             b.tuiguangRefresh.setRefreshing(false);
             toast(getString(R.string.failtorefresh));
         }
@@ -113,18 +114,19 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tuiguang_bianji:
                 getPopWindow();
                 break;
         }
     }
-// 弹出投稿记录 和我要投稿的popuwindow
-    PopupWindow mPopuwindow;
-    private void getPopWindow() {
+
+    // 弹出投稿记录 和我要投稿的popuwindow
+     PopupWindow mPopuwindow;
+    private void initPopuwindow() {
         View popupView = getActivity().getLayoutInflater().inflate(R.layout.item_popu_tougao, null);
-        Button tougao= (Button) popupView.findViewById(R.id.tuiguang_popu_tougao);
-        Button jilu= (Button) popupView.findViewById(R.id.tuiguang_popu_jilu);
+        Button tougao = (Button) popupView.findViewById(R.id.tuiguang_popu_tougao);
+        Button jilu = (Button) popupView.findViewById(R.id.tuiguang_popu_jilu);
         tougao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,11 +139,36 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
 
             }
         });
-        mPopuwindow = new PopupWindow(popupView,ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPopuwindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mPopuwindow.setTouchable(true);
         mPopuwindow.setBackgroundDrawable(new BitmapDrawable());
         mPopuwindow.setOutsideTouchable(true);
-//        mPopuwindow.showAtLocation(b.tuiguangPos,Gravity.TOP ,370, 190);
-        mPopuwindow.showAsDropDown(b.tuiguangPos,-50,0);
+        mPopuwindow.setFocusable(true);
+        mPopuwindow.setTouchInterceptor(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                    mPopuwindow.dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
+//对popuwindow 进行操作
+    private void getPopWindow() {
+        if (mPopuwindow == null) {
+             initPopuwindow();
+        }
+        if (mPopuwindow.isShowing()) {
+            mPopuwindow.dismiss();
+        } else {
+
+            mPopuwindow.showAsDropDown(b.tuiguangPos,  -50, 0);
+            mPopuwindow.update();
+        }
+    }
+
 }

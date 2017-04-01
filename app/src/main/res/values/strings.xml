@@ -62,4 +62,8 @@
     <string name="partner">合伙人</string>
     <string name="woyaotougao">我要投稿</string>
     <string name="tougaojilu">投稿记录</string>
+    <string name="dailiren">代理人</string>
+    <string name="haopingl">好评率</string>
+    <string name="chengdanliang">成单量</string>
+    <string name="zonghe">综合</string>
 </resources>

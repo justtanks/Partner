@@ -14,7 +14,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -34,13 +34,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'org.xutils:xutils:3.3.40'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.squareup.picasso:picasso:2.3.2'
     compile files('libs/MobCommons-2017.0216.1054.jar')
     compile files('libs/MobTools-2017.0216.1054.jar')
     compile files('libs/ShareSDK-Core-2.8.1.jar')
@@ -51,4 +44,12 @@ dependencies {
     compile files('libs/ShareSDK-QQ-2.8.1.jar')
     compile files('libs/ShareSDK-QZone-2.8.1.jar')
     compile files('libs/ShareSDK-Wechat-2.8.1.jar')
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'org.xutils:xutils:3.3.40'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }
