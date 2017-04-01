@@ -3,13 +3,19 @@ package com.ts.partner.partnerFragment;
 import android.content.Intent;
 import android.content.pm.InstrumentationInfo;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.ts.partner.BR;
 import com.ts.partner.R;
@@ -17,17 +23,22 @@ import com.ts.partner.databinding.TuiguangBinding;
 import com.ts.partner.partnerActivity.HomeActivity;
 import com.ts.partner.partnerActivity.ShareMesActivity;
 import com.ts.partner.partnerAdapter.simpleAdapter.ListAdapter;
+import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBase.BaseFragment;
 import com.ts.partner.partnerBase.impl.OnShareMsgChangeListener;
 import com.ts.partner.partnerBean.netBean.LoginBean;
 import com.ts.partner.partnerBean.netBean.ShareMesBean;
+
+import org.xutils.x;
+
+import static android.R.attr.data;
 
 /**
  * Created by Administrator on 2017/2/25.
  * home
  */
 
-public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnShareMsgChangeListener {
+public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnShareMsgChangeListener ,View.OnClickListener{
     HomeActivity activity;
     TuiguangBinding b;
     private static ShareMesBean datas = new ShareMesBean();
@@ -47,14 +58,14 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
         activity.setOnShareMsgChangeListenr(this);
         datas = activity.getShareDatas();
         if (datas != null && datas.getMsg() != null && datas.getMsg().size() != 0) {
-            View view = LayoutInflater.from(activity).inflate(R.layout.item_sharelv_headview, null);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-            b.tuiguangLv.addHeaderView(view);
+//            View view = LayoutInflater.from(activity).inflate(R.layout.item_sharelv_headview, null);
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//            });
+//            b.tuiguangLv.addHeaderView(view);
             adapter = new ListAdapter<>(activity, datas.getMsg(), BR.msgbean, R.layout.item_share_lv);
             b.tuiguangLv.setAdapter(adapter);
         }
@@ -62,10 +73,11 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, ShareMesActivity.class);
-                intent.putExtra("sharedata", datas.getMsg().get(position - 1));
+                intent.putExtra("sharedata", datas.getMsg().get(position));
                 startActivity(intent);
             }
         });
+        b.tuiguangBianji.setOnClickListener(this);
 
     }
 
@@ -73,8 +85,7 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
     private void initFresh() {
         b.tuiguangRefresh.setOnRefreshListener(this);
         // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
-        b.tuiguangRefresh.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        b.tuiguangRefresh.setColorSchemeResources(android.R.color.holo_blue_bright);
         b.tuiguangRefresh.setDistanceToTriggerSync(400);// 设置手指在屏幕下拉多少距离会触发下拉刷新
         b.tuiguangRefresh.setSize(SwipeRefreshLayout.DEFAULT); // 设置圆圈的大小
 
@@ -98,5 +109,39 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
             toast(getString(R.string.failtorefresh));
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tuiguang_bianji:
+                getPopWindow();
+                break;
+        }
+    }
+// 弹出投稿记录 和我要投稿的popuwindow
+    PopupWindow mPopuwindow;
+    private void getPopWindow() {
+        View popupView = getActivity().getLayoutInflater().inflate(R.layout.item_popu_tougao, null);
+        Button tougao= (Button) popupView.findViewById(R.id.tuiguang_popu_tougao);
+        Button jilu= (Button) popupView.findViewById(R.id.tuiguang_popu_jilu);
+        tougao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        jilu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mPopuwindow = new PopupWindow(popupView,ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPopuwindow.setTouchable(true);
+        mPopuwindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopuwindow.setOutsideTouchable(true);
+//        mPopuwindow.showAtLocation(b.tuiguangPos,Gravity.TOP ,370, 190);
+        mPopuwindow.showAsDropDown(b.tuiguangPos,-50,0);
     }
 }

@@ -60,4 +60,6 @@
     <string name="gengxinchenggong">数据更新成功</string>
     <string name="failtorefresh">更新失败</string>
     <string name="partner">合伙人</string>
+    <string name="woyaotougao">我要投稿</string>
+    <string name="tougaojilu">投稿记录</string>
 </resources>

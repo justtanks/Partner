@@ -31,35 +31,38 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/login_back_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/tuiguang_bianji"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="15dp"
-                android:src="@mipmap/fanhui"
-                android:visibility="gone" />
+                android:layout_alignParentEnd="true"
+                android:src="@mipmap/tuiguang_jinru"
+                />
+            <ImageView
+                android:id="@+id/tuiguang_pos"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="80dp"
+                />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/tuiguang_back"
             android:layout_below="@id/tuiguang_title"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
             >
             <ListView
                 android:id="@+id/tuiguang_lv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:scrollbars="none"
                 ></ListView>
         </RelativeLayout>
 
