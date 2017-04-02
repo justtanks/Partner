@@ -27,6 +27,9 @@ import com.ts.partner.partnerUtils.NetUtils;
 
 import org.xutils.common.Callback;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2017/2/25.
  */
@@ -83,17 +86,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private void toDailiren() {
        dialog=ProgressDialog.show(getActivity(),"","正在获取代理人列表");
         dialog.show();
-        NetUtils.Get(BaseData.DAILILIEBIAO, null, new Callback.CommonCallback<String>() {
+        NetUtils.Get(BaseData.DAILILIEBIAO, new HashMap<String, String>() {
+        }, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                Gson gson=new Gson();
-                if(result.substring(0,18).contains("Error")){
-                    NetError err=gson.fromJson(result,NetError.class);
+                Gson gson = new Gson();
+                if (result.substring(0, 18).contains("Error")) {
+                    NetError err = gson.fromJson(result, NetError.class);
                     toast(err.getMsg());
-                }else {
-                    WaitersBean bean=gson.fromJson(result,WaitersBean.class);
-                    Intent intent=new Intent(getActivity(), WaiterListActivity.class);
-                    intent.putExtra("waiters",bean);
+                } else {
+                    WaitersBean bean = gson.fromJson(result, WaitersBean.class);
+                    Intent intent = new Intent(getActivity(), WaiterListActivity.class);
+                    intent.putExtra("waiters", bean);
                     startActivity(intent);
                 }
             }
@@ -110,7 +114,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
             @Override
             public void onFinished() {
-                 dialog.dismiss();
+                dialog.dismiss();
             }
         });
     }

@@ -86,7 +86,8 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".partnerActivity.ShareMesActivity" />
-        <activity android:name=".partnerActivity.WaiterListActivity"></activity>
+        <activity android:name=".partnerActivity.WaiterListActivity" />
+        <activity android:name=".partnerActivity.ShareWaiterActivity"></activity>
     </application>
 
 </manifest>
