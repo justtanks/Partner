@@ -1,5 +1,4 @@
 package com.ts.partner.partnerAdapter.simpleAdapter;
-
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
@@ -8,12 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-
-
 /**
  * Created by Administrator on 2017/1/19
  * 通用的通过databinding 建立的recycleview的adapter 直接传入数据和布局 就可以直接将数据展示
  * 相当于工具类，直接如果没有其他需求可以直接使用
+ * 
  */
 
 public class CommonRecycleAdapter <T>extends RecyclerView.Adapter <CommonRecycleAdapter.DataViewHolder>{

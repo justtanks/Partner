@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/1.
- * 代理人综合排序的frament 使用同一套布局
+ * 代理人综合排序的frament  按照综合进行排序
  */
 
 public class ZhongHeFragment extends BaseFragment {
@@ -50,6 +50,7 @@ public class ZhongHeFragment extends BaseFragment {
                 Intent intent=new Intent(activity, ShareWaiterActivity.class);
                 if(datas!=null&&datas.size()!=0){
                     intent.putExtra("waiterid",datas.get(position).getId());
+                    intent.putExtra("waiterpic",datas.get(position).getWaiter_pic());
                 }
                 startActivity(intent);
             }

@@ -26,6 +26,8 @@ import org.xutils.common.Callback;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by Administrator on 2017/2/13.
  * 登录界面
@@ -39,7 +41,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public static String DATAS_KEY = "datas";
     ProgressDialog dialog;
     Map<String, Boolean> isEnable = new HashMap<>();
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         bing.loginEditPass.setOnFocusChangeListener(this);
         bing.loginEditPhone.addTextChangedListener(new NameWatcher());
         bing.loginEditPass.addTextChangedListener(new PWatcher());
+        ShareSDK.initSDK(this, "1b82993cdeee3");
         isEnable.put("name", false);
         isEnable.put("pass", false);
     }

@@ -37,7 +37,6 @@ public class ShareMesActivity extends BaseActivity implements View.OnClickListen
         b = DataBindingUtil.setContentView(this, R.layout.activity_share_mes);
         b.shareReback.setOnClickListener(this);
         b.shareSharebt.setOnClickListener(this);
-        ShareSDK.initSDK(this, "1b82993cdeee3");
         datas = (ShareMesBean.MsgBean) getIntent().getSerializableExtra("sharedata");
         initWebview();
     }
@@ -88,7 +87,7 @@ public class ShareMesActivity extends BaseActivity implements View.OnClickListen
     void share() {
         OnekeyShare oks = new OnekeyShare();
         //分享到微博 微信也是这个
-        oks.setImageUrl("http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg");  //这个image必须是
+        oks.setImageUrl(datas.getSpread_pic());  //这个image 用户头像url
         oks.setText(datas.getSpread_title());
         //分享到qq
         oks.setTitle(datas.getSpread_title());

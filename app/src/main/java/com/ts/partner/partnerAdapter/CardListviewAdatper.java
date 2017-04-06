@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/2/15.
+ * 展示银行卡的信息的listview的adapter
  */
 
 public class CardListviewAdatper extends BaseAdapter {

@@ -16,9 +16,6 @@ import com.ts.partner.partnerUtils.BankUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-
-
-
 /*
    添加银行卡第一步的activity
  */
@@ -32,8 +29,7 @@ public class AddcardStep1Activity extends BaseActivity implements View.OnClickLi
         b = DataBindingUtil.setContentView(this, R.layout.activity_addcard_step1);
         init();
     }
-
-
+    
     private void init() {
         b.addcardNextstep.setOnClickListener(this);
         b.step1Back.setOnClickListener(this);
@@ -141,7 +137,6 @@ public class AddcardStep1Activity extends BaseActivity implements View.OnClickLi
                 isEnable.put("cardnum", false);
             }
             judge();
-
         }
     }
 

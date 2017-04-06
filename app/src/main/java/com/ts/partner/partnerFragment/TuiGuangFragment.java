@@ -36,7 +36,7 @@ import static android.R.attr.data;
 
 /**
  * Created by Administrator on 2017/2/25.
- * home
+ * home 推广界面 显示文章列表
  */
 
 public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnShareMsgChangeListener ,View.OnClickListener {

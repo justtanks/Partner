@@ -21,8 +21,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/1.
- * 代理人综合排序的frament
- * 可以用一个fragment代替 但是不方便添加新功能
+ * 代理人综合排序的frament  按照好评进行分组
  */
 
 public class HaopingFragment extends BaseFragment {
@@ -51,6 +50,7 @@ public class HaopingFragment extends BaseFragment {
                 Intent intent=new Intent(activity, ShareWaiterActivity.class);
                 if(datas!=null&&datas.size()!=0){
                     intent.putExtra("waiterid",datas.get(position).getId());
+                    intent.putExtra("waiterpic",datas.get(position).getWaiter_pic());
                 }
                 startActivity(intent);
             }
