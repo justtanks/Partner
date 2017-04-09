@@ -29,7 +29,7 @@ public class AddcardStep1Activity extends BaseActivity implements View.OnClickLi
         b = DataBindingUtil.setContentView(this, R.layout.activity_addcard_step1);
         init();
     }
-    
+
     private void init() {
         b.addcardNextstep.setOnClickListener(this);
         b.step1Back.setOnClickListener(this);
