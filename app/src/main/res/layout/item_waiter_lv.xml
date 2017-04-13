@@ -103,6 +103,18 @@
                 android:text="山东企成成"
                 android:textColor="@color/gray2"
                 android:textSize="12sp" />
+            <TextView
+                android:id="@+id/itemwaiter_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/waiter_qiyemingchegn"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/waiter_head"
+                android:textColor="@color/gray2"
+                android:textSize="12sp"
+                android:text="@{waitersdata.waiter_address}"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,8 +122,8 @@
                 android:layout_below="@id/waiter_qiyemingchegn"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/waiter_head"
-                android:text="@{waitersdata.waiter_work_time}"
+                android:layout_toRightOf="@id/itemwaiter_location"
+                android:text="@{waitersdata.waiter_work_time+`年工作经验`}"
                 android:textColor="@color/gray2"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -163,10 +175,9 @@
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/main_tixianbutton"
                 android:textSize="12sp"
-                android:text="@{waitersdata.good_say+`%`}"
+                android:text="@{waitersdata.good_say+`个`}"
                 />
 
         </LinearLayout>
-
     </LinearLayout>
 </layout>

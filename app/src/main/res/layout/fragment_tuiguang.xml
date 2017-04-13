@@ -39,6 +39,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:src="@mipmap/tuiguang_jinru"
+                android:visibility="gone"
                 />
             <ImageView
                 android:id="@+id/tuiguang_pos"

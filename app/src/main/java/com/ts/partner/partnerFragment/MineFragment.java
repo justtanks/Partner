@@ -15,6 +15,7 @@ import com.ts.partner.databinding.MineFragmentBinding;
 import com.ts.partner.partnerActivity.CardActivity;
 import com.ts.partner.partnerActivity.HomeActivity;
 import com.ts.partner.partnerActivity.LoginActivity;
+import com.ts.partner.partnerActivity.SettingActivity;
 import com.ts.partner.partnerActivity.WaiterListActivity;
 import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBase.BaseFragment;
@@ -72,12 +73,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 startActivity(intent);
                 break;
             case R.id.mine_setting:
-                toast("设置尚未开通");
+                toSetting();
                 break;
             case R.id.mine_dailiren:
                 toDailiren();
                 break;
         }
+    }
+//跳转到设置界面
+    private void toSetting() {
+        Intent intent=new Intent(getActivity(), SettingActivity.class);
+        startActivity(intent);
     }
  /*
   跳转到代理人名片列表界面
@@ -100,6 +106,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                     intent.putExtra("waiters", bean);
                     startActivity(intent);
                 }
+
             }
 
             @Override

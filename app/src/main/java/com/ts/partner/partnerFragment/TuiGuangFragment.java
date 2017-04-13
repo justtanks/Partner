@@ -116,7 +116,7 @@ public class TuiGuangFragment extends BaseFragment implements SwipeRefreshLayout
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tuiguang_bianji:
-                getPopWindow();
+//                getPopWindow();
                 break;
         }
     }

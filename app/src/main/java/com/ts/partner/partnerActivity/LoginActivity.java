@@ -41,6 +41,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public static String DATAS_KEY = "datas";
     ProgressDialog dialog;
     Map<String, Boolean> isEnable = new HashMap<>();
+    public static  final int HOMEBACKCODE=1111;
+    public static  final  int SETTINGBACKCODE=2222;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -173,7 +175,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (resultCode == HOMEBACKCODE) {
             finish();
         }
 

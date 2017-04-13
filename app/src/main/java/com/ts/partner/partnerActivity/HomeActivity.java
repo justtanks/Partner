@@ -33,7 +33,6 @@ import java.util.List;
 public class HomeActivity extends BaseActivity {
     //记录登录时间
     private long currentTime;
-
     private static FragmentTabHost mTabHost;
     public static final String MAIN_KEY = "1";
     private Class mFragmentArray[] = {HomeFragmnent.class, TuiGuangFragment.class, MineFragment.class
@@ -137,6 +136,7 @@ public class HomeActivity extends BaseActivity {
             currentTime = time;
             return;
         }
+        this.setResult(LoginActivity.HOMEBACKCODE);
         super.onBackPressed();
     }
 

@@ -40,7 +40,11 @@
             android:name=".partnerActivity.AddpassWordActivity"
             android:launchMode="singleTask" />
         <activity android:name=".partnerActivity.SurePasswordActivity" />
-        <activity android:name=".partnerActivity.LoginActivity">
+        <activity android:name=".partnerActivity.LoginActivity"
+            android:launchMode="singleTask"
+            >
+        </activity>
+        <activity android:name=".partnerActivity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -87,7 +91,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".partnerActivity.ShareMesActivity" />
         <activity android:name=".partnerActivity.WaiterListActivity" />
-        <activity android:name=".partnerActivity.ShareWaiterActivity"></activity>
+        <activity android:name=".partnerActivity.ShareWaiterActivity" />
+        <activity android:name=".partnerActivity.SettingActivity"></activity>
     </application>
 
 </manifest>

@@ -19,5 +19,6 @@
     <color name="qiangdan_toptabtex_notselect">#ffe000</color>
     <color name="titiletextcolor">#711486</color>
     <color name="color_ff0000">#ff0000</color>
+    <color name="settingback">#e1e1e1</color>
 
 </resources>

@@ -21,6 +21,7 @@ import com.ts.partner.partnerFragment.YestodayOrdersFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /*
 展示所有订单的activity
  */
@@ -36,7 +37,6 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
     private ArrayList<Fragment> fragmentList;
     private Fragment allFormfragment, todayFragment, yesdayFragment, beforYesdayFragment;
     private List<TextView> textViews;
-
 
 
     @Override
@@ -93,7 +93,7 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
         DisplayMetrics dm = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(dm);
         int screenW = dm.widthPixels;
-        offset = 0+30;
+        offset = 0 + 30;
         position_one = (int) (screenW / 4.0);
         position_two = position_one * 2;
         position_three = position_one * 3;
@@ -209,9 +209,9 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        animation=null;
-        fragmentList=null;
-        textViews=null;
-        b=null;
+        animation = null;
+        fragmentList = null;
+        textViews = null;
+        b = null;
     }
 }

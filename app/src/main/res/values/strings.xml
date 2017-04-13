@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.Android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">Partner</string>
+    <string name="app_name">合伙人企成成</string>
     <string name="main_baobiao">报表</string>
     <string name="main_my">我的</string>
     <string name="main_todayreceive">今日收益(元)</string>
@@ -66,5 +66,8 @@
     <string name="haopingl">好评率</string>
     <string name="chengdanliang">成单量</string>
     <string name="zonghe">综合</string>
-    <string name="good_ca">好评率</string>
+    <string name="good_ca">好评数</string>
+    <string name="setting">设置</string>
+    <string name="zanweikaitong">暂未开通</string>
+    <string name="qingliwancheng">缓存清理完成</string>
 </resources>
