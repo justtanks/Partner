@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.mob.commons.SHARESDK;
 import com.ts.partner.R;
 import com.ts.partner.databinding.HomeBinding;
@@ -17,14 +18,22 @@ import com.ts.partner.partnerActivity.DrawCashActivity;
 import com.ts.partner.partnerActivity.HomeActivity;
 import com.ts.partner.partnerActivity.LoginActivity;
 import com.ts.partner.partnerActivity.OrdersActivity;
+import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBase.BaseFragment;
 import com.ts.partner.partnerBase.impl.OnDatasChangeListener;
 import com.ts.partner.partnerBean.BendingBean.DatasInMain;
 import com.ts.partner.partnerBean.BendingBean.ShowMsgInMineBean;
 import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.NetError;
+import com.ts.partner.partnerUtils.NetUtils;
+import com.ts.partner.partnerUtils.SystemUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.xutils.common.Callback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -40,7 +49,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
     LoginBean.DataBean datas;
     DatasInMain maida;
     HomeActivity homeActivity;
-
+   SystemUtil su=new SystemUtil(getContext());
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,10 +63,12 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
         b.mainTixian.setOnClickListener(this);
         homeActivity = (HomeActivity) getActivity();
         logindatas = homeActivity.getDatas();
-        datas = logindatas.getData().get(0);
-        maida = new DatasInMain(datas);
+        if(logindatas!=null){
+            datas = logindatas.getData().get(0);
+            maida = new DatasInMain(datas);
+            b.setDatas(maida);
+        }
         homeActivity.setOndatasChangeListener(this);
-        b.setDatas(maida);
 
     }
 
@@ -108,37 +119,57 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
         b.setDatas(maida);
     }
 
-    //    @Subscribe
-//    public void onEvent(LoginBean.DataBean datas) {
-//        //提现之后刷新数据，直接重新设置数据
-//        this.datas = datas;
-//        maida = new DatasInMain(datas);
-//        b.setDatas(maida);
+    //检查登录 然后到setting 界面退出登录
+//    private void checkLogin() {
+//        Map<String, String> params = new HashMap<>();
+//        params.put("partner_tel",su.showPhone() );
+//        params.put("partner_password", su.showPwd());
+//       NetUtils.Get(BaseData.LOGIN, params, new Callback.CommonCallback<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                Gson gson = new Gson();
+//                String cutResult = result.substring(0, 19);
+//                if (cutResult.contains("Error")) {
+//                   //跳转到
+//                    return;
+//                } else {
+//                    LoginBean login = gson.fromJson(result, LoginBean.class);
+//                    if ("Success".equals(login.getFlag())) {
+//                        su.saveUid(Integer.parseInt(login.getData().get(0).getPartner_id()));
+//                        su.savePhone(login.getData().get(0).getPartner_account());
+//                        su.savePwd(login.getData().get(0).getPartner_password());
+//                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                        intent.putExtra(DATAS_KEY, login);
+//                        startActivityForResult(intent, 1);
+//                        startActivity(intent);
+//                        login = null;
+//                    } else {
+//                        login = null;
+//                        return;
+//                    }
+//
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+//                toast(getString(R.string.net_error));
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//            }
+//
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//        });
+//
 //    }
-    //调用分享
-    private void showShare() {
-        ShareSDK.initSDK(getContext(), "1b82993cdeee3");
-        OnekeyShare oks = new OnekeyShare();
-//关闭sso授权
-        oks.disableSSOWhenAuthorize();
-// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间等使用
-        oks.setTitle("标题");
-// titleUrl是标题的网络链接，QQ和QQ空间等使用
-        oks.setTitleUrl("http://sharesdk.cn");
-// text是分享文本，所有平台都需要这个字段
-        oks.setText("我是分享文本");
-// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-//oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
-// url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://sharesdk.cn");
-// comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我是测试评论文本");
-// site是分享此内容的网站名称，仅在QQ空间使用
-        oks.setSite(getString(R.string.app_name));
-// siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("http://sharesdk.cn");
 
-// 启动分享GUI
-        oks.show(getContext());
-    }
+
 }

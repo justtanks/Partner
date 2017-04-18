@@ -203,7 +203,6 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
     }
 
     @Override

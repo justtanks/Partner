@@ -54,6 +54,7 @@ public class AddcardDoneActivity extends BaseActivity {
     同步关于银行卡的信息
      */
     Callback.Cancelable cancel;
+    LoginBean login;
     //18253487693
 
     private void update() {
@@ -73,7 +74,7 @@ public class AddcardDoneActivity extends BaseActivity {
                     error = null;
                     return;
                 } else {
-                    LoginBean login = gson.fromJson(result, LoginBean.class);
+                     login = gson.fromJson(result, LoginBean.class);
                     if ("Success".equals(login.getFlag())) {
                         EventBus.getDefault().post(login);
                         switch (processid){
@@ -89,21 +90,14 @@ public class AddcardDoneActivity extends BaseActivity {
                                 startActivity(intent1);
                                 break;
                         }
-
                     } else {
-                        login = null;
                         return;
                     }
-
-
                 }
-
             }
-
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 toast(getString(R.string.net_error));
-
             }
 
             @Override

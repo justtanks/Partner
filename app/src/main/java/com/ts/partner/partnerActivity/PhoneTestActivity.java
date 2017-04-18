@@ -94,6 +94,12 @@ public class PhoneTestActivity extends BaseActivity implements View.OnClickListe
 
     private void jump() {
         String textYanz=binding.phonetestYanzhengma.getText().toString();
+//        Intent intent = new Intent(this, AddCardInputPassWorldActivity.class);
+//        intent.putExtra("cardnum",cardnum);
+//        intent.putExtra("cardcity",cardcity);
+//        startActivity(intent);
+
+        // 验证码接口
         if(yanzhen.equals(textYanz)){
             Intent intent = new Intent(this, AddCardInputPassWorldActivity.class);
             intent.putExtra("cardnum",cardnum);
@@ -140,7 +146,6 @@ public class PhoneTestActivity extends BaseActivity implements View.OnClickListe
     };
 
     private void getWordFromNet() {
-
         binding.phonetestObtainmsg.setBackground(null);
         handler.post(runnable);
         binding.phonetestObtainmsg.setEnabled(false);
@@ -152,7 +157,7 @@ public class PhoneTestActivity extends BaseActivity implements View.OnClickListe
                 Gson gson = new Gson();
                 Regist_phoneback phoneMsg = gson.fromJson(result, Regist_phoneback.class);
                 yanzhen=phoneMsg.getMsg();
-                loge("yanzheng",yanzhen);
+
 
             }
 

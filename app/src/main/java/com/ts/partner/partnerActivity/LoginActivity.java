@@ -41,13 +41,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public static String DATAS_KEY = "datas";
     ProgressDialog dialog;
     Map<String, Boolean> isEnable = new HashMap<>();
-    public static  final int HOMEBACKCODE=1111;
-    public static  final  int SETTINGBACKCODE=2222;
+    public static final int HOMEBACKCODE = 1111;
+    public static final int SETTINGBACKCODE = 2222;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bing = DataBindingUtil.setContentView(this, R.layout.activity_login);
+//        autoLogin();
         mDataEdit = new TestEditLoginBean();
         bing.setPass(mDataEdit);
         init();
@@ -59,6 +60,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         bing.loginEditPass.setOnFocusChangeListener(this);
         bing.loginEditPhone.addTextChangedListener(new NameWatcher());
         bing.loginEditPass.addTextChangedListener(new PWatcher());
+        bing.loginRegist.setOnClickListener(this);
         ShareSDK.initSDK(this, "1b82993cdeee3");
         isEnable.put("name", false);
         isEnable.put("pass", false);
@@ -70,7 +72,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             case R.id.login_loginbutton:
                 LoginOnNet();
                 break;
+            case R.id.login_regist:
+                toRegist();
+                break;
         }
+    }
+
+    private void toRegist() {
+        Intent intent=new Intent(this,RegistActivity.class);
+        startActivity(intent);
     }
 
     private void LoginOnNet() {
@@ -106,6 +116,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         su.savePhone(login.getData().get(0).getPartner_account());
                         su.savePwd(login.getData().get(0).getPartner_password());
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.putExtra("isfresh", getIntent().getIntExtra("isfresh", 0));
                         intent.putExtra(DATAS_KEY, login);
                         startActivityForResult(intent, 1);
                         startActivity(intent);
@@ -114,10 +125,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         login = null;
                         return;
                     }
-
-
                 }
-
             }
 
             @Override
@@ -250,5 +258,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         cancel = null;
         mDataEdit = null;
         bing = null;
+    }
+
+    //添加自动登录
+    //自动登录
+    private void autoLogin() {
+        if ("".equals(su.showPhone()) || su.showPhone() == null || "".equals(su.showPwd()) || su.showPwd() == null) {
+            return;
+        } else {
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("isfresh", getIntent().getIntExtra("isfresh", 0));
+            startActivity(intent);
+        }
     }
 }

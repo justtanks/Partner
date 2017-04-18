@@ -15,7 +15,6 @@
     tools:context="com.ts.partner.partnerActivity.LoginActivity"
    >
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/qiangdan_toptabtex_notselect"
@@ -31,15 +30,16 @@
             android:textStyle="bold"
             android:text="登录"
             />
-        <ImageView
-            android:id="@+id/login_back_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="15dp"
-            android:src="@mipmap/fanhui"
-            android:visibility="gone"
-            />
+       <Button
+           android:id="@+id/login_regist"
+           android:layout_width="55dp"
+           android:layout_height="match_parent"
+           style="@style/Widget.AppCompat.Button.Borderless"
+           android:text="@string/regist_user"
+           android:textColor="@color/main_tixianbutton"
+           android:layout_alignParentEnd="true"
+           />
+
 
     </RelativeLayout>
     <RelativeLayout

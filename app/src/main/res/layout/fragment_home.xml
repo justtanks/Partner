@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--homefragment使用的是activity_home  不是这个-->
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class="HomeBinding">
@@ -143,12 +144,12 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="111"
                         android:gravity="center"
-                        android:text="@{Datas.allMoney}"
+                        android:text="1"
                         android:textColor="@color/titiletextcolor"
                         android:textSize="20sp" />
-
+                    <!--android:text="@{Datas.allMoney.equals(``)?`0`:Datas.allMoney}"-->
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -270,17 +271,13 @@
                 android:layout_toRightOf="@+id/home_biaodan"
                 android:text="@string/main_shouyi"
                 android:textSize="13sp" />
-
-
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/home_preyes_shouyi"
                 android:text="@{Datas.beyesdayOrderCount.equals(`0`)?`0`:Datas.beyesdayMoney}"
                 android:textColor="@color/titiletextcolor"
                 android:textSize="13sp" />
-
         </RelativeLayout>
 
         <RelativeLayout

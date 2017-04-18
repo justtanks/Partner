@@ -1,5 +1,8 @@
 package com.ts.partner.partnerActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -20,6 +23,7 @@ import com.ts.partner.partnerBean.netBean.ShareMesBean;
 import com.ts.partner.partnerFragment.HomeFragmnent;
 import com.ts.partner.partnerFragment.MineFragment;
 import com.ts.partner.partnerFragment.TuiGuangFragment;
+import com.ts.partner.partnerService.UpdateService;
 import com.ts.partner.partnerUtils.NetUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -46,7 +50,7 @@ public class HomeActivity extends BaseActivity {
     private List<OnDatasChangeListener> lis = new ArrayList<>();
     //返回分享信息fragment的信息回调
     private OnShareMsgChangeListener shareListner;
-
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +97,7 @@ public class HomeActivity extends BaseActivity {
         mTabHost.setOnTabChangedListener(tabChangeListener);
         //添加工具界面的点击事件
         currentTime = System.currentTimeMillis();
+        getFresh();
     }
 
     private TabHost.OnTabChangeListener tabChangeListener = new TabHost.OnTabChangeListener() {
@@ -205,4 +210,33 @@ public class HomeActivity extends BaseActivity {
         shareListner=null;
         lis=null;
     }
+    //显示是否具有新版本并进行更新
+    private  void getFresh(){
+        if(getIntent().getIntExtra("isfresh",0)==1){
+            showUpdataDialog();
+        }
+    }
+    //弹出对话框
+    private void showUpdataDialog() {
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("已经有新版本");
+        builder.setMessage("是否进行更新？").
+                setCancelable(false).setPositiveButton("是", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent service = new Intent(HomeActivity.this,UpdateService.class);
+                startService(service);
+                dialog.cancel();
+            }
+        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

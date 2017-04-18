@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/today_orders"
+                        android:text="总单数"
                         android:textColor="@color/titiletextcolor"
                         android:textSize="13sp" />
 
@@ -157,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{Datas.allMoney}"
+                        android:text="@{Datas.allMoney==null?`0`:Datas.allMoney}"
                         android:textColor="@color/titiletextcolor"
                         android:textSize="20sp" />
 
@@ -225,7 +225,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="昨日"
+                android:text="今日"
                 android:textColor="@color/gray3"
                 android:textSize="13sp" />
 
@@ -235,7 +235,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/befores_yestoday"
+                android:text="昨日"
                 android:textColor="@color/gray3"
                 android:textSize="13sp" />
         </LinearLayout>

@@ -20,5 +20,6 @@
     <color name="titiletextcolor">#711486</color>
     <color name="color_ff0000">#ff0000</color>
     <color name="settingback">#e1e1e1</color>
-
+    <color name="registhintcolor">#bababa</color>
+    <color name="regist_tiaoyue">#701585</color>
 </resources>

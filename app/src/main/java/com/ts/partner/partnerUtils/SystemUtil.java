@@ -4,6 +4,8 @@ package com.ts.partner.partnerUtils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import com.ts.partner.partnerApplication.MyApplication;
 
@@ -13,7 +15,7 @@ import com.ts.partner.partnerApplication.MyApplication;
 
 public class SystemUtil {
     private static final String MINE = "partner";
-    private Context context;
+    private static  Context context;
     private static final String OPENID = "openID";
     private static final String RMEMBER = "remember";
     private static final String UID = "uid";
@@ -251,5 +253,19 @@ public class SystemUtil {
         Editor editor = preferences.edit();
         editor.clear().commit();
     }
+    /*
+      获取程序当前版本号
+      */
+    public static  float getVersionCode()
+    {
 
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packInfo = null;
+        try {
+            packInfo = packageManager.getPackageInfo(context.getPackageName(),0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return packInfo.versionCode;
+    }
 }

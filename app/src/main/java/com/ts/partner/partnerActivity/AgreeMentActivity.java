@@ -1,6 +1,6 @@
 package com.ts.partner.partnerActivity;
 
-import android.app.Activity;
+
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +14,7 @@ import com.ts.partner.R;
 import com.ts.partner.databinding.AgreementBinding;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
-
+//合作协议的activity
 public class AgreeMentActivity extends BaseActivity implements View.OnClickListener{
     AgreementBinding b;
     WebView webView;

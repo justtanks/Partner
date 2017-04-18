@@ -70,4 +70,6 @@
     <string name="setting">设置</string>
     <string name="zanweikaitong">暂未开通</string>
     <string name="qingliwancheng">缓存清理完成</string>
+    <string name="huoquyanzhengma">获取验证码</string>
+    <string name="regist_user">注册</string>
 </resources>

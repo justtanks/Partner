@@ -40,10 +40,9 @@
             android:name=".partnerActivity.AddpassWordActivity"
             android:launchMode="singleTask" />
         <activity android:name=".partnerActivity.SurePasswordActivity" />
-        <activity android:name=".partnerActivity.LoginActivity"
-            android:launchMode="singleTask"
-            >
-        </activity>
+        <activity
+            android:name=".partnerActivity.LoginActivity"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".partnerActivity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,7 +91,14 @@
         <activity android:name=".partnerActivity.ShareMesActivity" />
         <activity android:name=".partnerActivity.WaiterListActivity" />
         <activity android:name=".partnerActivity.ShareWaiterActivity" />
-        <activity android:name=".partnerActivity.SettingActivity"></activity>
+        <activity android:name=".partnerActivity.SettingActivity" />
+
+        <service
+            android:name=".partnerService.UpdateService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".partnerActivity.RegistActivity"></activity>
     </application>
 
 </manifest>
