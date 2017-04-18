@@ -15,6 +15,7 @@ import com.ts.partner.databinding.MineFragmentBinding;
 import com.ts.partner.partnerActivity.CardActivity;
 import com.ts.partner.partnerActivity.HomeActivity;
 import com.ts.partner.partnerActivity.LoginActivity;
+import com.ts.partner.partnerActivity.PushAreaActivity;
 import com.ts.partner.partnerActivity.SettingActivity;
 import com.ts.partner.partnerActivity.WaiterListActivity;
 import com.ts.partner.partnerBase.BaseData;
@@ -57,6 +58,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         b.mineSetting.setOnClickListener(this);
         b.mineMycard.setOnClickListener(this);
         b.mineDailiren.setOnClickListener(this);
+        b.mineArea.setOnClickListener(this);
         logindatas = homeActivity.getDatas();
         datas = logindatas.getData().get(0);
         data = new ShowMsgInMineBean((datas));
@@ -78,9 +80,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.mine_dailiren:
                 toDailiren();
                 break;
+            case R.id.mine_area:
+                toArea();
+                break;
         }
     }
-//跳转到设置界面
+  //跳到提交申请地区界面
+    private void toArea() {
+        Intent intent=new Intent(getActivity(), PushAreaActivity.class);
+        startActivity(intent);
+    }
+
+    //跳转到设置界面
     private void toSetting() {
         Intent intent=new Intent(getActivity(), SettingActivity.class);
         startActivity(intent);

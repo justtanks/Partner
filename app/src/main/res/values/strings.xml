@@ -72,4 +72,6 @@
     <string name="qingliwancheng">缓存清理完成</string>
     <string name="huoquyanzhengma">获取验证码</string>
     <string name="regist_user">注册</string>
+    <string name="shenqingdiqu">申请地区</string>
+    <string name="tijiaodiqu">提交地区成功</string>
 </resources>

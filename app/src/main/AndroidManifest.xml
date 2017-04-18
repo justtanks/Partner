@@ -42,7 +42,7 @@
         <activity android:name=".partnerActivity.SurePasswordActivity" />
         <activity
             android:name=".partnerActivity.LoginActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity android:name=".partnerActivity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -98,7 +98,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".partnerActivity.RegistActivity"></activity>
+        <activity android:name=".partnerActivity.RegistActivity" />
+        <activity android:name=".partnerActivity.PushAreaActivity"></activity>
     </application>
 
 </manifest>
