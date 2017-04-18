@@ -241,6 +241,7 @@ public class PushAreaActivity extends BaseActivity implements View.OnClickListen
                 }
             }
         }).build();
+
         pickerView.setNPicker(list, null, null);
         pickerView.show();
     }
