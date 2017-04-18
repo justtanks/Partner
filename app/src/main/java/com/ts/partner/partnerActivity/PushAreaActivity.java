@@ -28,9 +28,6 @@ import java.util.Map;
 
 public class PushAreaActivity extends BaseActivity implements View.OnClickListener {
     ActivityPushAreaBinding b;
-    HashMap<String, String> shengmap = new HashMap<>();
-    HashMap<String, String> shimap = new HashMap<>();
-    HashMap<String, String> qumap = new HashMap<>();
     String ShengId;
     String ShiId;
     String quId;
@@ -125,6 +122,7 @@ public class PushAreaActivity extends BaseActivity implements View.OnClickListen
             b.areaQutext.setText(null);
             b.areaShitext.setText(null);
         }
+        HashMap<String, String> shengmap = new HashMap<>();
         AreaSheng area = gson.fromJson(areasheng, AreaSheng.class);
         for (AreaSheng.DataBean ar : area.getData()) {
             shengmap.put(ar.getProvice_name(), ar.getProvice_id());
@@ -161,6 +159,7 @@ public class PushAreaActivity extends BaseActivity implements View.OnClickListen
                 if (result.substring(0, 18).contains("Error")) {
                     return;
                 }
+                HashMap<String, String> shimap = new HashMap<>();
                 AreaShi shis = gson.fromJson(result, AreaShi.class);
                 for (AreaShi.DataBean sh : shis.getData()) {
                     shimap.put(sh.getCity_name(), sh.getCity_id());
@@ -195,6 +194,7 @@ public class PushAreaActivity extends BaseActivity implements View.OnClickListen
                 if (result.substring(0, 18).contains("Error")) {
                     return;
                 }
+                HashMap<String, String> qumap = new HashMap<>();
                 AreaXian shis = gson.fromJson(result, AreaXian.class);
                 for (AreaXian.DataBean sh : shis.getData()) {
                     qumap.put(sh.getCounty_name(), sh.getCounty_id());
