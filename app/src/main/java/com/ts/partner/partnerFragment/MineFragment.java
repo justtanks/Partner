@@ -14,7 +14,6 @@ import com.ts.partner.R;
 import com.ts.partner.databinding.MineFragmentBinding;
 import com.ts.partner.partnerActivity.CardActivity;
 import com.ts.partner.partnerActivity.HomeActivity;
-import com.ts.partner.partnerActivity.LoginActivity;
 import com.ts.partner.partnerActivity.PushAreaActivity;
 import com.ts.partner.partnerActivity.SettingActivity;
 import com.ts.partner.partnerActivity.WaiterListActivity;
@@ -22,10 +21,12 @@ import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBase.BaseFragment;
 import com.ts.partner.partnerBase.impl.OnDatasChangeListener;
 import com.ts.partner.partnerBean.BendingBean.ShowMsgInMineBean;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerBean.netBean.WaitersBean;
 import com.ts.partner.partnerUtils.NetUtils;
+import com.ts.partner.partnerUtils.SystemUtil;
 
 import org.xutils.common.Callback;
 
@@ -36,15 +37,15 @@ import java.util.Map;
  * Created by Administrator on 2017/2/25.
  */
 
-public class MineFragment extends BaseFragment implements View.OnClickListener, OnDatasChangeListener {
+public class MineFragment extends BaseFragment implements View.OnClickListener{
     MineFragmentBinding b;
     ShowMsgInMineBean data;
-    LoginBean.DataBean datas;
-    LoginBean logindatas;
+    LoginDataBean.DataBean datas;
+    LoginDataBean logindatas;
     HomeActivity homeActivity;
     ProgressDialog dialog;
-
-    @Nullable
+    SystemUtil su=new SystemUtil(getContext());
+     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_mine, container, false);
@@ -62,17 +63,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         logindatas = homeActivity.getDatas();
         datas = logindatas.getData().get(0);
         data = new ShowMsgInMineBean((datas));
-        homeActivity.setOndatasChangeListener(this);
-        b.setMinedatas(data);
+         b.setMinedatas(data);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mine_mycard:
-                Intent intent = new Intent(getActivity(), CardActivity.class);
-                intent.putExtra(HomeActivity.MAIN_KEY, data);
-                startActivity(intent);
+                getCardFromNet();
                 break;
             case R.id.mine_setting:
                 toSetting();
@@ -137,18 +135,43 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         });
     }
 
+    private void getCardFromNet() {
+        dialog=ProgressDialog.show(getActivity(),"","正在获取银行卡信息");
+        dialog.show();
+        Map<String, Object> param = new HashMap<>();
+        param.put("partner_id", su.showUid());
+        NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (result.substring(0, 18).contains("Error")) {
+                    return;
+                } else {
+                    CardBean card = new Gson().fromJson(result, CardBean.class);
+                    Intent intent = new Intent(getActivity(), CardActivity.class);
+                    intent.putExtra(HomeActivity.MAIN_KEY, card);
+                    startActivity(intent);
+                 }
+            }
 
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+                dialog.dismiss();
+            }
+        });
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-    }
-
-    //反应homeactivity 中数据变化
-    @Override
-    public void onDatasChange(LoginBean datainhome) {
-        datas = datainhome.getData().get(0);
-        data = new ShowMsgInMineBean((datas));
-        b.setMinedatas(data);
     }
 }

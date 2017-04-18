@@ -8,7 +8,6 @@ import android.view.View;
 import com.ts.partner.R;
 import com.ts.partner.databinding.XiangqingBinding;
 import com.ts.partner.partnerBean.BendingBean.XiangqingBendingBean;
-import com.ts.partner.partnerBean.netBean.LoginBean;
 
 /**
  * 详情界面activity

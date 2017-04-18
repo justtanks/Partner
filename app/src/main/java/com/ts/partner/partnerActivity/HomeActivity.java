@@ -18,7 +18,7 @@ import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBase.impl.OnDatasChangeListener;
 import com.ts.partner.partnerBase.impl.OnShareMsgChangeListener;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 import com.ts.partner.partnerBean.netBean.ShareMesBean;
 import com.ts.partner.partnerFragment.HomeFragmnent;
 import com.ts.partner.partnerFragment.MineFragment;
@@ -45,7 +45,7 @@ public class HomeActivity extends BaseActivity {
     private String textArray[] = {"合伙人", "我要推广", "我的"};
     private LayoutInflater mInflater;
     //从loginactivity 获取的数据
-    private LoginBean datas;
+    private LoginDataBean datas;
     // 记录回调对象
     private List<OnDatasChangeListener> lis = new ArrayList<>();
     //返回分享信息fragment的信息回调
@@ -62,12 +62,12 @@ public class HomeActivity extends BaseActivity {
     }
 
     //获取到从登录界面传过来的值
-    public LoginBean getDatas() {
+    public LoginDataBean getDatas() {
         return datas;
     }
 
     private void initData() {
-        datas = (LoginBean) getIntent().getSerializableExtra(LoginActivity.DATAS_KEY);
+        datas = (LoginDataBean) getIntent().getSerializableExtra(LoginActivity.DATAS_KEY);
     }
 
     //将所有的注册监听保存起来  有时间做出一个反射版本，保存方法
@@ -146,7 +146,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onEvent(LoginBean datas) {
+    public void onEvent(LoginDataBean datas) {
         //提现之后刷新数据，直接重新设置数据
         this.datas = datas;
         for (OnDatasChangeListener li : lis) {

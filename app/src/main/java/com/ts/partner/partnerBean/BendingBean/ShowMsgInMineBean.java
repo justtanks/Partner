@@ -4,8 +4,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
 import com.ts.partner.BR;
-import com.ts.partner.partnerBase.BaseData;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,27 +20,9 @@ public class ShowMsgInMineBean extends BaseObservable implements Serializable {
     String carNum;
     String phone;
     String location;
-    List<LoginBean.DataBean.PartnerBankCardBean> cars;
 
-    public ShowMsgInMineBean(LoginBean.DataBean bean) {
-        this.name=bean.getPartner_name();
-        this.cars=bean.getPartner_bank_card();
-        if(this.cars==null||this.cars.size()==0){
-            this.carNum="0";
-        }else{
-            this.carNum=this.cars.size()+"" ;
-        }
-        this.phone=bean.getPartner_account();
-        this.location=bean.getPartner_belong_city();
-
-    }
-
-    public List<LoginBean.DataBean.PartnerBankCardBean> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<LoginBean.DataBean.PartnerBankCardBean> cars) {
-        this.cars = cars;
+    public ShowMsgInMineBean(LoginDataBean.DataBean bean) {
+        this.phone=bean.getPartner_info().get(0).getPartner_account();
     }
     @Bindable
     public String getName() {
@@ -87,17 +68,5 @@ public class ShowMsgInMineBean extends BaseObservable implements Serializable {
     public void setLocation(String location) {
         this.location = location;
         notifyPropertyChanged(BR.minedatas);
-    }
-
-    @Override
-    public String toString() {
-        return "ShowMsgInMineBean{" +
-                "name='" + name + '\'' +
-                ", headImg='" + headImg + '\'' +
-                ", carNum='" + carNum + '\'' +
-                ", phone='" + phone + '\'' +
-                ", location='" + location + '\'' +
-                ", cars=" + cars +
-                '}';
     }
 }

@@ -1,7 +1,6 @@
 package com.ts.partner.partnerAdapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ts.partner.R;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
 
 import java.util.List;
 
@@ -22,15 +21,15 @@ import java.util.List;
 public class CardListviewAdatper extends BaseAdapter {
     Context context;
     LayoutInflater inflater;
-    List<LoginBean.DataBean.PartnerBankCardBean> datas;
+    List<CardBean.DataBean> datas;
 
-    public CardListviewAdatper(Context context, List<LoginBean.DataBean.PartnerBankCardBean> datas) {
+    public CardListviewAdatper(Context context, List<CardBean.DataBean> datas) {
         this.context = context;
         this.datas = datas;
         this.inflater = LayoutInflater.from(context);
 
     }
-    public void setDatas(List<LoginBean.DataBean.PartnerBankCardBean> datas){
+    public void setDatas(List<CardBean.DataBean> datas){
         this.datas=datas;
 //        notifyDataSetChanged();
     }
@@ -69,7 +68,7 @@ public class CardListviewAdatper extends BaseAdapter {
             holder = (TViewHolder) convertView.getTag();
         }
         if(datas!=null&&datas.size()!=0){
-            LoginBean.DataBean.PartnerBankCardBean data = datas.get(position);
+            CardBean.DataBean data = datas.get(position);
             String bankname = data.getBank_name();
             StringBuffer cardnum=new StringBuffer(data.getCard_num());
             String str=null;

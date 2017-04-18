@@ -42,12 +42,7 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_orders);
         b = DataBindingUtil.setContentView(this, R.layout.activity_orders);
-//        LoginBean bean = (LoginBean) getIntent().getSerializableExtra(LoginActivity.DATAS_KEY);
-//        OrdersFactory factory = new OrdersFactory(bean);
-//        List<LoginBean.DataBean.PartnerYesterdayOrderBean> datas = (List<LoginBean.DataBean.PartnerYesterdayOrderBean>) factory.getOrders(2);
-//        toast(datas.get(0).getBelong_city());
         init();
     }
 

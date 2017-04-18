@@ -16,7 +16,7 @@ import com.ts.partner.databinding.LonginBing;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBean.BendingBean.TestEditLoginBean;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerUtils.NetUtils;
 import com.ts.partner.partnerUtils.SystemUtil;
@@ -110,11 +110,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     error = null;
                     return;
                 } else {
-                    LoginBean login = gson.fromJson(result, LoginBean.class);
+                    LoginDataBean login = gson.fromJson(result, LoginDataBean.class);
                     if ("Success".equals(login.getFlag())) {
-                        su.saveUid(Integer.parseInt(login.getData().get(0).getPartner_id()));
-                        su.savePhone(login.getData().get(0).getPartner_account());
-                        su.savePwd(login.getData().get(0).getPartner_password());
+                        su.saveUid(Integer.parseInt(login.getData().get(0).getPartner_info().get(0).getId()));
+                        su.savePhone(login.getData().get(0).getPartner_info().get(0).getPartner_account());
+                        su.savePwd(mDataEdit.getUserPassword());
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         intent.putExtra("isfresh", getIntent().getIntExtra("isfresh", 0));
                         intent.putExtra(DATAS_KEY, login);

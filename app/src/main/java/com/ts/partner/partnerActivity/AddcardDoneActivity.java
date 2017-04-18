@@ -2,7 +2,6 @@ package com.ts.partner.partnerActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,7 @@ import com.google.gson.Gson;
 import com.ts.partner.R;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
 import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerUtils.NetUtils;
 import com.ts.partner.partnerUtils.SystemUtil;
@@ -20,7 +19,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.xutils.common.Callback;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /*
@@ -54,16 +52,15 @@ public class AddcardDoneActivity extends BaseActivity {
     同步关于银行卡的信息
      */
     Callback.Cancelable cancel;
-    LoginBean login;
+    CardBean cardBean;
     //18253487693
 
     private void update() {
         dialog = ProgressDialog.show(this, "", "同步信息中");
         dialog.show();
-        Map<String, String> params = new HashMap<>();
-        params.put("partner_tel", su.showPhone());
-        params.put("partner_password", su.showPwd());
-        cancel = NetUtils.Get(BaseData.LOGIN, params, new Callback.CommonCallback<String>() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("partner_id", su.showUid());
+        NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 Gson gson = new Gson();
@@ -74,9 +71,9 @@ public class AddcardDoneActivity extends BaseActivity {
                     error = null;
                     return;
                 } else {
-                     login = gson.fromJson(result, LoginBean.class);
-                    if ("Success".equals(login.getFlag())) {
-                        EventBus.getDefault().post(login);
+                     cardBean = gson.fromJson(result, CardBean.class);
+                    if ("Success".equals(cardBean.getFlag())) {
+                        EventBus.getDefault().post(cardBean);
                         switch (processid){
                             case 0:
                                 toast("bug");

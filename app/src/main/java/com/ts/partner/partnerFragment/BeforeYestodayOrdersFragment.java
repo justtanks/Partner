@@ -3,14 +3,12 @@ package com.ts.partner.partnerFragment;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.ts.partner.BR;
 import com.ts.partner.R;
@@ -20,7 +18,6 @@ import com.ts.partner.partnerActivity.XiangqingActivity;
 import com.ts.partner.partnerAdapter.simpleAdapter.ListAdapter;
 import com.ts.partner.partnerBase.BaseFragment;
 import com.ts.partner.partnerBean.BendingBean.DatasInMain;
-import com.ts.partner.partnerBean.netBean.LoginBean;
 
 import java.util.List;
 

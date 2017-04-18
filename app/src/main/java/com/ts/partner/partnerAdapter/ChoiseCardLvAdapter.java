@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ts.partner.R;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +23,10 @@ import java.util.List;
 public class ChoiseCardLvAdapter extends BaseAdapter {
     private Context context;
     LayoutInflater inflater;
-    List<LoginBean.DataBean.PartnerBankCardBean> datas = new ArrayList<>();
+    List<CardBean.DataBean> datas = new ArrayList<>();
     int pos=-1;
 
-    public ChoiseCardLvAdapter(Context context, List<LoginBean.DataBean.PartnerBankCardBean> datas) {
+    public ChoiseCardLvAdapter(Context context, List<CardBean.DataBean> datas) {
         this.context = context;
         this.datas = datas;
         this.inflater = LayoutInflater.from(context);
@@ -39,7 +39,7 @@ public class ChoiseCardLvAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setDatas(List<LoginBean.DataBean.PartnerBankCardBean> datas) {
+    public void setDatas(List<CardBean.DataBean> datas) {
         this.datas = datas;
     }
 

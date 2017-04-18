@@ -1,22 +1,18 @@
 package com.ts.partner.partnerFragment;
 
 import android.content.Intent;
-import android.content.pm.InstrumentationInfo;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 
 import com.ts.partner.BR;
 import com.ts.partner.R;
@@ -24,15 +20,9 @@ import com.ts.partner.databinding.TuiguangBinding;
 import com.ts.partner.partnerActivity.HomeActivity;
 import com.ts.partner.partnerActivity.ShareMesActivity;
 import com.ts.partner.partnerAdapter.simpleAdapter.ListAdapter;
-import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBase.BaseFragment;
 import com.ts.partner.partnerBase.impl.OnShareMsgChangeListener;
-import com.ts.partner.partnerBean.netBean.LoginBean;
 import com.ts.partner.partnerBean.netBean.ShareMesBean;
-
-import org.xutils.x;
-
-import static android.R.attr.data;
 
 /**
  * Created by Administrator on 2017/2/25.

@@ -1,9 +1,7 @@
 package com.ts.partner.partnerActivity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,20 +19,19 @@ import com.google.gson.Gson;
 import com.ts.partner.R;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
+import com.ts.partner.partnerBean.netBean.CardBean;
 import com.ts.partner.partnerBean.netBean.DrawMoneyBean;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerUtils.NetUtils;
 import com.ts.partner.partnerUtils.SystemUtil;
 import com.ts.partner.partnerViews.PwdEditText;
 
 import org.greenrobot.eventbus.EventBus;
-import org.w3c.dom.Text;
 import org.xutils.common.Callback;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,13 +55,13 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
     TextView backText;
     @ViewInject(R.id.tixian_bank)
     TextView bankName;
-    private LoginBean.DataBean datas = null;
+    private LoginDataBean.DataBean datas = null;
+    private CardBean cards;
     private String bankname;
     private String bankNum;
     SystemUtil su = new SystemUtil(this);
     //进入银行卡选择界面后返回的标识
     public static final int TOGETCARD = 1;
-
     ProgressDialog waitDialog = null;
 
     @Override
@@ -84,15 +80,16 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
         quanbutixian.setOnClickListener(this);
         buttonTixian.setOnClickListener(this);
         moneyEdit.addTextChangedListener(new MyTextWathcer());
-        datas = (LoginBean.DataBean) getIntent().getSerializableExtra("datas");
-        currentnum.setText("可提现余额" + datas.getPartner_account_balance() + "元");
-        setName(datas.getPartner_bank_card().get(0));
+        datas = (LoginDataBean.DataBean) getIntent().getSerializableExtra("datas");
+        cards= (CardBean) getIntent().getSerializableExtra("cards");
+        currentnum.setText("可提现余额" + datas.getPartner_infos().get(0).getPartner_balance() + "元");
+        setName(cards.getData().get(0));
     }
 
     //设置界面内容
-    private void setName(LoginBean.DataBean.PartnerBankCardBean data) {
-        bankNum = data.getCard_num();
-        bankname = data.getBank_name();
+    private void setName(CardBean.DataBean cards) {
+        bankNum = cards.getCard_num();
+        bankname = cards.getBank_name();
         bankName.setText(bankname + "(" + getLast4String(bankNum) + ")");
     }
 
@@ -132,7 +129,7 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
     private void getNewCard() {
         Intent intent = new Intent(this, ChoiseCardActivity.class);
         //选择后返回，将数据设置到text上
-        intent.putExtra("datas", datas);
+        intent.putExtra("datas", cards);
         startActivityForResult(intent, TOGETCARD);
     }
 
@@ -142,7 +139,7 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == TOGETCARD) {
             Bundle bundle = data.getExtras();
-            LoginBean.DataBean.PartnerBankCardBean datas = (LoginBean.DataBean.PartnerBankCardBean) bundle.getSerializable("datas1");
+           CardBean.DataBean datas = (  CardBean.DataBean) bundle.getSerializable("datas1");
             setName(datas);
         }
     }
@@ -235,7 +232,7 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void quanbutixian() {
-        moneyEdit.setText(datas.getPartner_account_balance()+"");
+        moneyEdit.setText(datas.getPartner_infos().get(0).getPartner_balance()+"");
     }
 
 
@@ -262,7 +259,7 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
             }
             int num = Integer.parseInt(money);
             if (num > 0) {
-                if (num > datas.getPartner_account_balance()) {
+                if (num > datas.getPartner_infos().get(0).getPartner_balance()) {
                     toast("超出可提现余额，不能提现");
                     setButton(false);
                     return;
@@ -316,7 +313,7 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
                     error = null;
                     return;
                 } else {
-                    LoginBean login = gson.fromJson(result, LoginBean.class);
+                    LoginDataBean login = gson.fromJson(result, LoginDataBean.class);
                     if ("Success".equals(login.getFlag())) {
                         EventBus.getDefault().post(login);
                         Intent intenm = new Intent(DrawCashActivity.this, HomeActivity.class);

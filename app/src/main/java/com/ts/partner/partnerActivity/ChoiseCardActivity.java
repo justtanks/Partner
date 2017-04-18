@@ -1,11 +1,9 @@
 package com.ts.partner.partnerActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -13,21 +11,18 @@ import com.ts.partner.R;
 import com.ts.partner.databinding.ChoiseCardBinding;
 import com.ts.partner.partnerAdapter.ChoiseCardLvAdapter;
 import com.ts.partner.partnerBase.BaseActivity;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
 import com.ts.partner.partnerUtils.SystemUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /*
 选择银行卡界面
  */
 public class ChoiseCardActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     ChoiseCardBinding b;
-    LoginBean.DataBean datas = null;
+    CardBean datas = null;
     ChoiseCardLvAdapter adapter;
     private Intent intent;
     public static final int FROM_CHOISCARD = 11111;
@@ -44,12 +39,11 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
         b.choisecardNewcard.setOnClickListener(this);
         b.choisecardReback.setOnClickListener(this);
         intent = getIntent();
-        datas = (LoginBean.DataBean) intent.getSerializableExtra("datas");
-        adapter = new ChoiseCardLvAdapter(this, datas.getPartner_bank_card());
+        datas = (CardBean) intent.getSerializableExtra("datas");
+        adapter = new ChoiseCardLvAdapter(this, datas.getData());
         b.choisecardLb.setAdapter(adapter);
         b.choisecardLb.setOnItemClickListener(this);
         EventBus.getDefault().register(this);
-
     }
 
     Runnable runnable1 = new Runnable() {
@@ -80,8 +74,8 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
     }
     //刷新添加的银行卡
     @Subscribe
-    public void onEventList(LoginBean datas) {
-        adapter.setDatas(datas.getData().get(0).getPartner_bank_card());
+    public void onEventList(CardBean datas) {
+        adapter.setDatas(datas.getData());
         adapter.notifyDataSetChanged();
     }
     //添加银行卡
@@ -98,7 +92,7 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         adapter.setPos(position);
         b.choisecardDuihao.setVisibility(View.INVISIBLE);
-        LoginBean.DataBean.PartnerBankCardBean choisedCard = datas.getPartner_bank_card().get(position);
+        CardBean.DataBean choisedCard = datas.getData().get(position);
         Bundle bundle = new Bundle();
         bundle.putSerializable("datas1", choisedCard);
         intent.putExtras(bundle);

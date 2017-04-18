@@ -18,9 +18,9 @@ import com.ts.partner.partnerAdapter.CardListviewAdatper;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBean.BendingBean.ShowMsgInMineBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
 import com.ts.partner.partnerBean.netBean.DeleteCardSuccess;
 import com.ts.partner.partnerBean.netBean.IsHadPasswordBean;
-import com.ts.partner.partnerBean.netBean.LoginBean;
 import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerUtils.NetUtils;
 import com.ts.partner.partnerUtils.SystemUtil;
@@ -28,9 +28,8 @@ import com.ts.partner.partnerViews.PwdEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.xutils.common.Callback;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CardActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemLongClickListener{
@@ -38,7 +37,7 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
     我的银行卡界面
      */
     private CardBinding bingding;
-    ShowMsgInMineBean carddata;
+    CardBean carddata;
     CardListviewAdatper adatper;
     SystemUtil su=new SystemUtil(this);
     AlertDialog.Builder builder;
@@ -58,9 +57,9 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
         bingding.cardAddnewcard.setOnClickListener(this);
         bingding.cardBacktext.setOnClickListener(this);
         bingding.cardLv.setOnItemLongClickListener(this);
-        carddata= (ShowMsgInMineBean) getIntent().getSerializableExtra(HomeActivity.MAIN_KEY);
-        if(carddata!=null&&carddata.getCars()!=null){
-            adatper=new CardListviewAdatper(this,carddata.getCars());
+        carddata= (CardBean) getIntent().getSerializableExtra(HomeActivity.MAIN_KEY);
+        if(carddata!=null&&carddata.getData()!=null){
+            adatper=new CardListviewAdatper(this,carddata.getData());
             bingding.cardLv.setAdapter(adatper);
         }
     }
@@ -116,9 +115,8 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
     }
 
     @Subscribe
-    public void onEventList(LoginBean datas) {
-        carddata=new ShowMsgInMineBean(datas.getData().get(0));
-        adatper.setDatas(carddata.getCars());
+    public void onEventList(CardBean  datas) {
+        adatper.setDatas(carddata.getData());
         adatper.notifyDataSetChanged();
     }
 
@@ -143,8 +141,7 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
         builder.setCancelable(false).setPositiveButton("是", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                showPassword(carddata.getCars().get(position).getCard_num());
-                loge("cardnum"+carddata.getCars().get(position).getCard_num());
+                showPassword(carddata.getData().get(position).getCard_num());
                 dialog.cancel();
             }
         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -222,11 +219,9 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
     }
     //从新请求网络加载银行卡数据  adapter重新加载数据
     private void freshData() {
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("partner_tel", su.showPhone());
-        params.put("partner_password", su.showPwd());
-        NetUtils.Post(BaseData.LOGIN, params, new Callback.CommonCallback<String>() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("partner_id", su.showUid());
+        NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
 
@@ -234,11 +229,9 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
                     NetError error = gson.fromJson(result, NetError.class);
                     toast(error.getMsg());
                 } else {
-                    LoginBean login = gson.fromJson(result, LoginBean.class);
+                    CardBean login = gson.fromJson(result, CardBean.class);
                     if(login.getFlag().equals("Success")){
                         EventBus.getDefault().post(login);
-//                        adatper.setDatas(login.getData().get(0).getPartner_bank_card());
-//                        adatper.notifyDataSetChanged();
                     }
 
                 }

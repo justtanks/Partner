@@ -2,7 +2,7 @@ package com.ts.partner.partnerBean.BendingBean;
 
 import android.util.Log;
 
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,12 +17,21 @@ public class DatasInMain {
     String todayOrderCount;
     String yesdayMoney;
     String yesdayOrderCount;
-    String beyesdayMoney;
-    String beyesdayOrderCount;
+
     String allMoney;
     String todayTime;
     String yestodaytime;
     String beforyedaytime;
+    int allorders;
+
+    public int getAllorders() {
+        return allorders;
+    }
+
+    public void setAllorders(int allorders) {
+        this.allorders = allorders;
+    }
+
     int ketixian;
 
     public int getKetixian() {
@@ -57,16 +66,19 @@ public class DatasInMain {
         this.beforyedaytime = beforyedaytime;
     }
 
-    public DatasInMain(LoginBean.DataBean bean) {
-        this.todayMoney = bean.getPartner_today_order_money();
-        this.todayOrderCount = bean.getPartner_today_order_count();
-        this.yesdayMoney = bean.getPartner_yesterday_order_money();
-        this.yesdayOrderCount = bean.getPartner_yesterday_order_count();
-        this.beyesdayMoney = bean.getPartner_before_yesterday_order_money();
-        this.beyesdayOrderCount = bean.getPartner_before_yesterday_order_count();
-        this.allMoney = bean.getPartner_all_money();
-        this.ketixian=bean.getPartner_account_balance();
-        Log.e("log",bean.getPartner_account_balance()+"");
+    public DatasInMain(LoginDataBean.DataBean bean) {
+
+        for(LoginDataBean.DataBean.MoneyBean mon:bean.getToday_money()){
+                this.todayMoney+=mon.getMoney();
+        }
+        for(LoginDataBean.DataBean.MoneyBean mon:bean.getYesterday_money()){
+            this.yesdayMoney+=mon.getMoney();
+        }
+        this.allorders=bean.getAll_order().size();
+        this.todayOrderCount = bean.getToday_order().size()+"";
+        this.yesdayOrderCount = bean.getYesterday_order().size()+"";
+        this.allMoney = bean.getPartner_infos().get(0).getPartner_income()+"";
+        this.ketixian=bean.getPartner_infos().get(0).getPartner_balance();
         getdayTime();
 
     }
@@ -122,41 +134,11 @@ public class DatasInMain {
     public void setYesdayOrderCount(String yesdayOrderCount) {
         this.yesdayOrderCount = yesdayOrderCount;
     }
-
-    public String getBeyesdayMoney() {
-        return beyesdayMoney;
-    }
-
-    public void setBeyesdayMoney(String beyesdayMoney) {
-        this.beyesdayMoney = beyesdayMoney;
-    }
-
-    public String getBeyesdayOrderCount() {
-        return beyesdayOrderCount;
-    }
-
-    public void setBeyesdayOrderCount(String beyesdayOrderCount) {
-        this.beyesdayOrderCount = beyesdayOrderCount;
-    }
-
     public String getAllMoney() {
         return allMoney;
     }
 
     public void setAllMoney(String allMoney) {
         this.allMoney = allMoney;
-    }
-
-    @Override
-    public String toString() {
-        return "DatasInMain{" +
-                "todayMoney='" + todayMoney + '\'' +
-                ", todayOrderCount='" + todayOrderCount + '\'' +
-                ", yesdayMoney='" + yesdayMoney + '\'' +
-                ", yesdayOrderCount='" + yesdayOrderCount + '\'' +
-                ", beyesdayMoney='" + beyesdayMoney + '\'' +
-                ", beyesdayOrderCount='" + beyesdayOrderCount + '\'' +
-                ", allMoney='" + allMoney + '\'' +
-                '}';
     }
 }

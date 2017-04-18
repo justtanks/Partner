@@ -1,7 +1,5 @@
 package com.ts.partner.partnerBean.BendingBean;
 
-import com.ts.partner.partnerBean.netBean.LoginBean;
-
 /**
  * Created by Administrator on 2017/2/19.
  * 详情界面封装展示订单的信息的activity

@@ -1,5 +1,6 @@
 package com.ts.partner.partnerFragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.mob.commons.SHARESDK;
 import com.ts.partner.R;
-import com.ts.partner.databinding.HomeBinding;
 import com.ts.partner.databinding.HomeFragBinding;
 import com.ts.partner.partnerActivity.CardActivity;
 import com.ts.partner.partnerActivity.DrawCashActivity;
@@ -22,34 +21,32 @@ import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBase.BaseFragment;
 import com.ts.partner.partnerBase.impl.OnDatasChangeListener;
 import com.ts.partner.partnerBean.BendingBean.DatasInMain;
-import com.ts.partner.partnerBean.BendingBean.ShowMsgInMineBean;
-import com.ts.partner.partnerBean.netBean.LoginBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 import com.ts.partner.partnerBean.netBean.NetError;
+import com.ts.partner.partnerBean.netBean.OrdersBean;
 import com.ts.partner.partnerUtils.NetUtils;
 import com.ts.partner.partnerUtils.SystemUtil;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 import org.xutils.common.Callback;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
-
 /**
  * Created by Administrator on 2017/2/25.
- * home fragment 现在测试分享功能
+ * home fragment  首页fragment
  */
 
 public class HomeFragmnent extends BaseFragment implements View.OnClickListener, OnDatasChangeListener {
     HomeFragBinding b;
-    LoginBean logindatas;
-    LoginBean.DataBean datas;
+    LoginDataBean logindatas;
+    LoginDataBean.DataBean datas;
     DatasInMain maida;
     HomeActivity homeActivity;
-   SystemUtil su=new SystemUtil(getContext());
+    SystemUtil su = new SystemUtil(getContext());
+    ProgressDialog dialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,7 +60,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
         b.mainTixian.setOnClickListener(this);
         homeActivity = (HomeActivity) getActivity();
         logindatas = homeActivity.getDatas();
-        if(logindatas!=null){
+        if (logindatas != null) {
             datas = logindatas.getData().get(0);
             maida = new DatasInMain(datas);
             b.setDatas(maida);
@@ -84,17 +81,16 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
                 justToOrders();
                 break;
             case R.id.main_tixian:
-                jumpToMyCard();
+                getCardFromNet();
 //                  showShare();
                 break;
 
         }
     }
 
-    //跳转到提现界面
-    private void jumpToMyCard() {
-        //判断是否有银行卡 没有就先添加银行卡
-        if (datas.getPartner_bank_card()==null||datas.getPartner_bank_card().size() == 0) {
+    //判断是否有银行卡 没有就先添加银行卡
+    private void jumpToMyCard(CardBean card) {
+        if (card.getData().size()==0) {
             toast("请先添加银行卡");
             Intent intent = new Intent(homeActivity, CardActivity.class);
             startActivity(intent);
@@ -102,21 +98,91 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
         }
         Intent intent = new Intent(homeActivity, DrawCashActivity.class);
         intent.putExtra("datas", datas);
+        intent.putExtra("cards",card);
         startActivity(intent);
     }
 
     private void justToOrders() {
-        Intent intent = new Intent(homeActivity, OrdersActivity.class);
-        intent.putExtra(LoginActivity.DATAS_KEY, logindatas);
-        startActivity(intent);
+
+          dialog=ProgressDialog.show(getContext(),"","正在获取订单信息");
+          dialog.show();
+          Map<String,Object>param=new HashMap<>();
+        param.put("partner_id",su.showUid());
+          NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
+              @Override
+              public void onSuccess(String result) {
+                  if(result.substring(0,18).contains("Error")){
+                      NetError error=new Gson().fromJson(result,NetError.class);
+                      toast(error.getMsg());
+                  }else {
+                      OrdersBean orders=new Gson().fromJson(result,OrdersBean.class);
+                      Intent intent = new Intent(homeActivity, OrdersActivity.class);
+                      intent.putExtra(LoginActivity.DATAS_KEY, orders);
+                      startActivity(intent);
+                  }
+              }
+
+              @Override
+              public void onError(Throwable ex, boolean isOnCallback) {
+
+              }
+
+              @Override
+              public void onCancelled(CancelledException cex) {
+
+              }
+
+              @Override
+              public void onFinished() {
+
+              }
+          });
     }
 
     //每次homeactivity 返回数据变化后执行
     @Override
-    public void onDatasChange(LoginBean data) {
+    public void onDatasChange(LoginDataBean data) {
         datas = data.getData().get(0);
         maida = new DatasInMain(datas);
         b.setDatas(maida);
+    }
+
+    /*
+     从网络获取到所有的银行卡信息 也就是每次都访问银行卡信息
+     每次都从网络获取银行样卡信息
+     partner_id
+     */
+    private void getCardFromNet() {
+        dialog=ProgressDialog.show(getContext(),"","正在请求银行卡信息");
+        dialog.show();
+        Map<String, Object> param = new HashMap<>();
+        param.put("partner_id", su.showUid());
+        NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (result.substring(0, 18).contains("Error")) {
+                    return;
+                } else {
+                    CardBean card = new Gson().fromJson(result, CardBean.class);
+                   jumpToMyCard(card);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 
     //检查登录 然后到setting 界面退出登录
