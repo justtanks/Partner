@@ -47,7 +47,6 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
     HomeActivity homeActivity;
     SystemUtil su ;
     ProgressDialog dialog;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -240,6 +239,5 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
 //        });
 //
 //    }
-
 
 }

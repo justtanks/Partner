@@ -16,6 +16,7 @@ import com.ts.partner.databinding.LonginBing;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
 import com.ts.partner.partnerBean.BendingBean.TestEditLoginBean;
+import com.ts.partner.partnerBean.netBean.CardBean;
 import com.ts.partner.partnerBean.netBean.LoginDataBean;
 import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerUtils.NetUtils;
@@ -61,6 +62,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         bing.loginEditPhone.addTextChangedListener(new NameWatcher());
         bing.loginEditPass.addTextChangedListener(new PWatcher());
         bing.loginRegist.setOnClickListener(this);
+        bing.loginForgetpass.setOnClickListener(this);
         ShareSDK.initSDK(this, "1b82993cdeee3");
         isEnable.put("name", false);
         isEnable.put("pass", false);
@@ -75,7 +77,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             case R.id.login_regist:
                 toRegist();
                 break;
+            case R.id.login_forgetpass:
+                toGetPass();
+                break;
         }
+    }
+    //跳转到重新修改密码接口
+    private void toGetPass() {
+        Intent intent=new Intent(this,GetPassActivity.class);
+        startActivity(intent);
     }
 
     private void toRegist() {

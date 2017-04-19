@@ -99,7 +99,8 @@
             android:exported="true" />
 
         <activity android:name=".partnerActivity.RegistActivity" />
-        <activity android:name=".partnerActivity.PushAreaActivity"></activity>
+        <activity android:name=".partnerActivity.PushAreaActivity" />
+        <activity android:name=".partnerActivity.GetPassActivity"></activity>
     </application>
 
 </manifest>

@@ -136,7 +136,7 @@
                android:textSize="12dp"
                android:background="@null"
                android:textColorHint="@color/registhintcolor"
-               android:hint="请输入密码"
+               android:hint="请输入验证码"
                />
        </RelativeLayout>
        <RelativeLayout

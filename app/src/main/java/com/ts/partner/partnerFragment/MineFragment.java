@@ -33,11 +33,12 @@ import org.xutils.common.Callback;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
 /**
  * Created by Administrator on 2017/2/25.
  * 首页中我的信息界面
  */
-public class MineFragment extends BaseFragment implements View.OnClickListener{
+public class MineFragment extends BaseFragment implements View.OnClickListener {
     MineFragmentBinding b;
     ShowMsgInMineBean data;
     LoginDataBean.DataBean datas;
@@ -45,11 +46,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     HomeActivity homeActivity;
     ProgressDialog dialog;
     SystemUtil su;
-     @Nullable
+
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_mine, container, false);
-         su = new SystemUtil(getActivity());
+        su = new SystemUtil(getActivity());
         return b.getRoot();
     }
 
@@ -64,7 +66,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         logindatas = homeActivity.getDatas();
         datas = logindatas.getData().get(0);
         data = new ShowMsgInMineBean((datas));
-         b.setMinedatas(data);
+        b.setMinedatas(data);
     }
 
     @Override
@@ -84,15 +86,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
         }
     }
-  //跳到提交申请地区界面
+
+    //跳到提交申请地区界面
     private void toArea() {
-        Intent intent=new Intent(getActivity(), PushAreaActivity.class);
+        Intent intent = new Intent(getActivity(), PushAreaActivity.class);
         startActivity(intent);
     }
 
     //跳转到设置界面
     private void toSetting() {
-        Intent intent=new Intent(getActivity(), SettingActivity.class);
+        Intent intent = new Intent(getActivity(), SettingActivity.class);
         startActivity(intent);
     }
  /*
@@ -100,7 +103,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
   */
 
     private void toDailiren() {
-       dialog=ProgressDialog.show(getActivity(),"","正在获取代理人列表");
+        dialog = ProgressDialog.show(getActivity(), "", "正在获取代理人列表");
         dialog.show();
         NetUtils.Get(BaseData.DAILILIEBIAO, new HashMap<String, String>() {
         }, new Callback.CommonCallback<String>() {
@@ -138,39 +141,39 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     private void getCardFromNet() {
         try {
-        dialog=ProgressDialog.show(getActivity(),"","正在获取银行卡信息");
-        dialog.show();
-        Map<String, Object> param = new HashMap<>();
-        param.put("partner_id", su.showUid());
-        NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                if (result.substring(0, 18).contains("Error")) {
-                    return;
-                } else {
-                    CardBean card = new Gson().fromJson(result, CardBean.class);
-                    Intent intent = new Intent(getActivity(), CardActivity.class);
-                    intent.putExtra(HomeActivity.MAIN_KEY, card);
-                    startActivity(intent);
-                 }
-            }
+            dialog = ProgressDialog.show(getActivity(), "", "正在获取银行卡信息");
+            dialog.show();
+            Map<String, Object> param = new HashMap<>();
+            param.put("partner_id", su.showUid());
+            NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    if (result.substring(0, 18).contains("Error")) {
+                        return;
+                    } else {
+                        CardBean card = new Gson().fromJson(result, CardBean.class);
+                        Intent intent = new Intent(getActivity(), CardActivity.class);
+                        intent.putExtra(HomeActivity.MAIN_KEY, card);
+                        startActivity(intent);
+                    }
+                }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
 
-            }
+                }
 
-            @Override
-            public void onCancelled(CancelledException cex) {
+                @Override
+                public void onCancelled(CancelledException cex) {
 
-            }
+                }
 
-            @Override
-            public void onFinished() {
-                dialog.dismiss();
-            }
-        });
-        }catch (Exception e){
+                @Override
+                public void onFinished() {
+                    dialog.dismiss();
+                }
+            });
+        } catch (Exception e) {
             loge(e.getMessage());
             dialog.dismiss();
             toast("软件出现问题，请联系开发者");
