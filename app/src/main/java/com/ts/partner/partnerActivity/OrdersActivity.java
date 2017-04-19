@@ -75,6 +75,7 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
             });
         }
         setTextColor(0);
+
     }
 
 
