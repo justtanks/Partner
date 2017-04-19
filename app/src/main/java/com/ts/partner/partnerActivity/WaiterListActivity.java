@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.ts.partner.R;
 import com.ts.partner.databinding.ActivityWaiterListBinding;
 import com.ts.partner.partnerAdapter.OrderFragmentPagerAdapter;
+import com.ts.partner.partnerAdapter.WaiterListPagerAdapter;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBean.netBean.WaitersBean;
 import com.ts.partner.partnerFragment.AllOrdersFragment;
@@ -60,7 +61,7 @@ public class WaiterListActivity extends BaseActivity implements View.OnClickList
         fragmentList.add(chengDanYesdayFragment);
         b.waitersViewpager.setCurrentItem(0);
         b.waitersViewpager.setOffscreenPageLimit(4);
-        b.waitersViewpager.setAdapter(new OrderFragmentPagerAdapter(getSupportFragmentManager(), fragmentList));//解决fragment嵌套问题
+        b.waitersViewpager.setAdapter(new WaiterListPagerAdapter(getSupportFragmentManager(), fragmentList));//解决fragment嵌套问题
         b.waitersViewpager.addOnPageChangeListener(this);
         setTextColor(0);
     }

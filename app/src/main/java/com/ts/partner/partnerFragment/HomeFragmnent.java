@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
     LoginDataBean.DataBean datas;
     DatasInMain maida;
     HomeActivity homeActivity;
-    SystemUtil su = new SystemUtil(getContext());
+    SystemUtil su ;
     ProgressDialog dialog;
 
     @Nullable
@@ -56,6 +57,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
     }
 
     private void init() {
+        su = new SystemUtil(getActivity());
         b.mainDingdanmingxi.setOnClickListener(this);
         b.mainTixian.setOnClickListener(this);
         homeActivity = (HomeActivity) getActivity();
@@ -107,8 +109,8 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
           dialog=ProgressDialog.show(getContext(),"","正在获取订单信息");
           dialog.show();
           Map<String,Object>param=new HashMap<>();
-        param.put("partner_id",su.showUid());
-          NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
+         param.put("partner_id",su.showUid()+"");
+          NetUtils.Post(BaseData.GETORDERS, param, new Callback.CommonCallback<String>() {
               @Override
               public void onSuccess(String result) {
                   if(result.substring(0,18).contains("Error")){
@@ -118,13 +120,15 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
                       OrdersBean orders=new Gson().fromJson(result,OrdersBean.class);
                       Intent intent = new Intent(homeActivity, OrdersActivity.class);
                       intent.putExtra(LoginActivity.DATAS_KEY, orders);
+                      Log.e("log",result);
                       startActivity(intent);
                   }
               }
 
               @Override
               public void onError(Throwable ex, boolean isOnCallback) {
-
+                      toast(getString( R.string.net_error));
+                      loge(ex.getMessage());
               }
 
               @Override
@@ -134,7 +138,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
 
               @Override
               public void onFinished() {
-
+                dialog.dismiss();
               }
           });
     }
@@ -180,7 +184,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
 
             @Override
             public void onFinished() {
-
+                dialog.dismiss();
             }
         });
     }

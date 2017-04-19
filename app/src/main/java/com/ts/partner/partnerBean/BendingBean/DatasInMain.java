@@ -13,12 +13,12 @@ import java.util.Date;
  */
 
 public class DatasInMain {
-    String todayMoney;
-    String todayOrderCount;
-    String yesdayMoney;
-    String yesdayOrderCount;
+    int todayMoney;
+    int todayOrderCount;
+    int yesdayMoney;
+    int yesdayOrderCount;
 
-    String allMoney;
+    int allMoney;
     String todayTime;
     String yestodaytime;
     String beforyedaytime;
@@ -67,17 +67,18 @@ public class DatasInMain {
     }
 
     public DatasInMain(LoginDataBean.DataBean bean) {
-
-        for(LoginDataBean.DataBean.MoneyBean mon:bean.getToday_money()){
-                this.todayMoney+=mon.getMoney();
-        }
+       if(bean!=null&&bean.getToday_money()!=null){
+           for(LoginDataBean.DataBean.MoneyBean mon:bean.getToday_money()){
+               this.todayMoney+=mon.getMoney();
+           }
+       }
         for(LoginDataBean.DataBean.MoneyBean mon:bean.getYesterday_money()){
             this.yesdayMoney+=mon.getMoney();
         }
         this.allorders=bean.getAll_order().size();
-        this.todayOrderCount = bean.getToday_order().size()+"";
-        this.yesdayOrderCount = bean.getYesterday_order().size()+"";
-        this.allMoney = bean.getPartner_infos().get(0).getPartner_income()+"";
+        this.todayOrderCount = bean.getToday_order().size();
+        this.yesdayOrderCount = bean.getYesterday_order().size();
+        this.allMoney = bean.getPartner_infos().get(0).getPartner_income();
         this.ketixian=bean.getPartner_infos().get(0).getPartner_balance();
         getdayTime();
 
@@ -103,42 +104,43 @@ public class DatasInMain {
 
     }
 
-    public String getTodayMoney() {
+    public int getTodayMoney() {
         return todayMoney;
     }
 
-    public void setTodayMoney(String todayMoney) {
+    public void setTodayMoney(int todayMoney) {
         this.todayMoney = todayMoney;
     }
 
-    public String getTodayOrderCount() {
+    public int getTodayOrderCount() {
         return todayOrderCount;
     }
 
-    public void setTodayOrderCount(String todayOrderCount) {
+    public void setTodayOrderCount(int todayOrderCount) {
         this.todayOrderCount = todayOrderCount;
     }
 
-    public String getYesdayMoney() {
+    public int getYesdayMoney() {
         return yesdayMoney;
     }
 
-    public void setYesdayMoney(String yesdayMoney) {
+    public void setYesdayMoney(int yesdayMoney) {
         this.yesdayMoney = yesdayMoney;
     }
 
-    public String getYesdayOrderCount() {
+    public int getYesdayOrderCount() {
         return yesdayOrderCount;
     }
 
-    public void setYesdayOrderCount(String yesdayOrderCount) {
+    public void setYesdayOrderCount(int yesdayOrderCount) {
         this.yesdayOrderCount = yesdayOrderCount;
     }
-    public String getAllMoney() {
+
+    public int getAllMoney() {
         return allMoney;
     }
 
-    public void setAllMoney(String allMoney) {
+    public void setAllMoney(int allMoney) {
         this.allMoney = allMoney;
     }
 }

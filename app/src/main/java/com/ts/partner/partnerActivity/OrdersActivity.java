@@ -1,24 +1,21 @@
 package com.ts.partner.partnerActivity;
-
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.ts.partner.R;
 import com.ts.partner.databinding.OrderBinding;
 import com.ts.partner.partnerAdapter.OrderFragmentPagerAdapter;
 import com.ts.partner.partnerBase.BaseActivity;
+import com.ts.partner.partnerBean.netBean.OrdersBean;
 import com.ts.partner.partnerFragment.AllOrdersFragment;
-import com.ts.partner.partnerFragment.BeforeYestodayOrdersFragment;
-import com.ts.partner.partnerFragment.TodayOrdersFragment;
-import com.ts.partner.partnerFragment.YestodayOrdersFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,47 +24,90 @@ import java.util.List;
  */
 public class OrdersActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     OrderBinding b;
-    private Animation animation;
-    private int currIndex = 0;
-    private int bottomLineWidth;
-    private int offset = 0;
-    private int position_one;
-    private int position_two;
-    private int position_three;
-    private ArrayList<Fragment> fragmentList;
-    private Fragment allFormfragment, todayFragment, yesdayFragment, beforYesdayFragment;
+    private ArrayList<AllOrdersFragment> fragmentList;
     private List<TextView> textViews;
-
-
+    private  List<Button> buttons;
+    OrdersBean orders;
+    Handler handler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_orders);
         init();
     }
-
     private void init() {
-        textViews = new ArrayList<>();
-        textViews.add(b.myformTab1);
-        textViews.add(b.myformTab2);
-        textViews.add(b.myformTab3);
-        textViews.add(b.myformTab4);
+        orders = (OrdersBean)getIntent().getSerializableExtra(LoginActivity.DATAS_KEY);
         b.ordersBack.setOnClickListener(this);
         b.ordersFenlei.setOnClickListener(this);
-        b.myformTab1.setOnClickListener(new MyOnClickListener(0));
-        b.myformTab2.setOnClickListener(new MyOnClickListener(1));
-        b.myformTab3.setOnClickListener(new MyOnClickListener(2));
-        b.myformTab4.setOnClickListener(new MyOnClickListener(3));
-
+        initButton();
         initAdapter();
     }
+
+    //动态添加新的按钮
+    private void initButton(){
+        textViews = new ArrayList<>();
+        buttons=new ArrayList<>();
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
+                , ViewGroup.LayoutParams.MATCH_PARENT);
+        for(OrdersBean.DataBean data:orders.getData()){
+            Button button = new Button(getApplicationContext());
+            ImageView image=new ImageView(getApplicationContext());
+            button.setLayoutParams(params);
+            button.setText(data.getCity_name());
+            button.setGravity(Gravity.CENTER);
+            button.setTextSize(12);
+            button.setTextColor(getResources().getColor(R.color.gray3));
+            button.setBackgroundColor(getResources().getColor(R.color.write));
+            buttons.add(button);
+            image.setLayoutParams(params);
+            image.setImageDrawable(new BitmapDrawable());
+            b.myformTabLayout.addView(button);
+            b.myformTabLayout.addView(image);
+        }
+        for(int i=0;i<buttons.size();i++){
+            final int finalI = i;
+            buttons.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    b.orderViewpager.setCurrentItem(finalI);
+                    setTextColor(finalI);
+                }
+            });
+        }
+        setTextColor(0);
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        initWidth();
+        handler.postDelayed(runnable,10);
     }
 
+    Runnable runnable=new Runnable() {
+        @Override
+        public void run() {
+            changeData();
+        }
+    };
+    //传递fragment数据
+    private void changeData(){
+        for(int i=0;i<fragmentList.size();i++){
+            if(fragmentList.get(i)!=null){
+                fragmentList.get(i).onOrderchange(orders.getData().get(i));
+            }
+        }
+    }
+    private void initAdapter() {
+        fragmentList = new ArrayList<>();
+         for(OrdersBean.DataBean data:orders.getData()){
+             fragmentList.add(new AllOrdersFragment());
+         }
+        b.orderViewpager.setCurrentItem(0);
+        b.orderViewpager.setOffscreenPageLimit(4);
+        b.orderViewpager.setAdapter(new OrderFragmentPagerAdapter(getSupportFragmentManager(), fragmentList));
+        b.orderViewpager.addOnPageChangeListener(this);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -76,62 +116,18 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.orders_fenlei:
                 //判断是否下拉，然后做view的隐藏显示
-
                 break;
-
         }
 
     }
-
-    private void initWidth() {
-        bottomLineWidth = b.orderColorline.getLayoutParams().width;
-        DisplayMetrics dm = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int screenW = dm.widthPixels;
-        offset = 0 + 30;
-        position_one = (int) (screenW / 4.0);
-        position_two = position_one * 2;
-        position_three = position_one * 3;
-    }
-
-    private void initAdapter() {
-        fragmentList = new ArrayList<>();
-        allFormfragment = new AllOrdersFragment();
-        todayFragment = new TodayOrdersFragment();
-        yesdayFragment = new YestodayOrdersFragment();
-        beforYesdayFragment = new BeforeYestodayOrdersFragment();
-
-        fragmentList.add(todayFragment);
-        fragmentList.add(yesdayFragment);
-        fragmentList.add(beforYesdayFragment);
-        fragmentList.add(allFormfragment);
-        b.orderViewpager.setCurrentItem(0);
-        setTextColor(0);
-        b.orderViewpager.setOffscreenPageLimit(4);
-        b.orderViewpager.setAdapter(new OrderFragmentPagerAdapter(getSupportFragmentManager(), fragmentList));//解决fragment嵌套问题
-        b.orderViewpager.addOnPageChangeListener(this);
-    }
-
     private void setTextColor(int currIndex) {
-        for (TextView ts : textViews) {
+        for (Button ts : buttons) {
             ts.setTextColor(getResources().getColor(R.color.gray3));
         }
-        textViews.get(currIndex).setTextColor(getResources().getColor(R.color.main_tixianbutton));
-
+        buttons.get(currIndex).setTextColor(getResources().getColor(R.color.main_tixianbutton));
     }
 
-    public class MyOnClickListener implements View.OnClickListener {
-        private int index = 0;
 
-        public MyOnClickListener(int i) {
-            index = i;
-        }
-
-        @Override
-        public void onClick(View v) {
-            b.orderViewpager.setCurrentItem(index);
-        }
-    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -140,60 +136,7 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onPageSelected(int position) {
-        setTextColor(position);
-        switch (position) {
-            case 0:
-
-                if (currIndex == 1) {
-                    animation = new TranslateAnimation(position_one, 0, 0, 0);
-                } else if (currIndex == 2) {
-                    animation = new TranslateAnimation(position_two, 0, 0, 0);
-                } else if (currIndex == 3) {
-                    animation = new TranslateAnimation(position_three, 0, 0, 0);
-                } else if (currIndex == 4) {
-//                    animation = new TranslateAnimation(position_four, 0, 0, 0);
-                }
-                break;
-            case 1:
-                if (currIndex == 0) {
-                    animation = new TranslateAnimation(offset, position_one, 0, 0);
-                } else if (currIndex == 2) {
-                    animation = new TranslateAnimation(position_two, position_one, 0, 0);
-                } else if (currIndex == 3) {
-                    animation = new TranslateAnimation(position_three, position_one, 0, 0);
-                } else if (currIndex == 4) {
-//                    animation = new TranslateAnimation(position_four, position_one, 0, 0);
-                }
-                break;
-            case 2:
-                if (currIndex == 0) {
-                    animation = new TranslateAnimation(offset, position_two, 0, 0);
-                } else if (currIndex == 1) {
-                    animation = new TranslateAnimation(position_one, position_two, 0, 0);
-                } else if (currIndex == 3) {
-                    animation = new TranslateAnimation(position_three, position_two, 0, 0);
-                } else if (currIndex == 4) {
-//                    animation = new TranslateAnimation(position_four, position_two, 0, 0);
-                }
-                break;
-            case 3:
-                if (currIndex == 0) {
-                    animation = new TranslateAnimation(offset, position_three, 0, 0);
-                } else if (currIndex == 1) {
-                    animation = new TranslateAnimation(position_one, position_three, 0, 0);
-                } else if (currIndex == 2) {
-                    animation = new TranslateAnimation(position_two, position_three, 0, 0);
-                } else if (currIndex == 4) {
-//                    animation = new TranslateAnimation(position_four, position_three, 0, 0);
-                }
-                break;
-
-        }
-        currIndex = position;
-        animation.setFillAfter(true);
-        animation.setDuration(100);
-        b.orderColorline.startAnimation(animation);
-
+       setTextColor(position);
     }
 
     @Override
@@ -203,7 +146,6 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        animation = null;
         fragmentList = null;
         textViews = null;
         b = null;

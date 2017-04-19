@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data class="AllorderItem">
 
-        <variable
-            name="allorder"
-            type="com.ts.partner.partnerBean.netBean.LoginBean.DataBean.PartnerAllOrderBean"></variable>
+    <data class="AllorderItem">
+         <variable
+             name="orderstype"
+             type="com.ts.partner.partnerBean.netBean.OrdersBean.DataBean.OrderListBean"></variable>
         <variable
             name="base"
             type="com.ts.partner.partnerBase.BaseData"></variable>
     </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +21,7 @@
             android:layout_height="90dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            app:image="@{base.BASEURL+allorder.order_pic}" />
+            app:image="@{base.BASEURL+orderstype.order_pic}" />
 
         <TextView
             android:id="@+id/itemallday_name"
@@ -63,8 +64,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/itemallday_name"
-            android:text="@{allorder.order_name}" />
-
+            android:text="@{orderstype.order_name}"
+            />
+        <!--    android:text="@{allorder.order_name}" -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,12 +74,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/itemallday_zizhi"
-            android:text="@{allorder.order_qiye_name==null?`个人注册`:`企业注册`}"
             android:textColor="@color/gray3"
             android:textSize="13sp"
-
+            android:text="@{orderstype.order_qiye_name==null?`个人注册`:`企业注册`}"
             />
-
+        <!--android:text="@{allorder.order_qiye_name==null?`个人注册`:`企业注册`}"-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,12 +86,11 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/itemallday_allmoney"
-            android:text="@{allorder.order_price}"
             android:textColor="@color/gray3"
             android:textSize="13sp"
 
             />
-
+<!--  android:text="@{allorder.order_price}"-->
         <TextView
             android:id="@+id/itemallday_shouyi"
             android:layout_width="wrap_content"
@@ -98,9 +98,11 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/itemallday_zizhi"
             android:layout_marginEnd="13dp"
-            android:text="@{allorder.order_price}"
+
             android:textColor="@color/titiletextcolor"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:text="@{orderstype.order_price}"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,27 +124,28 @@
             android:text="@string/service"
             android:textColor="@color/gray2"
             android:textSize="13sp" />
+
         <TextView
             android:id="@+id/itemallday_content"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@{allorder.order_types}"
+            android:layout_below="@id/itemallday_head"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/itemallday_service"
             android:maxLines="1"
+
             android:textColor="@color/gray2"
             android:textSize="13sp"
-            android:layout_below="@id/itemallday_head"
-            android:layout_toRightOf="@id/itemallday_service"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
+            android:text="@{orderstype.order_type}"
             />
-        <TextView
+         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/itemallday_content"
             android:layout_below="@id/itemallday_head"
             android:layout_marginTop="15dp"
-            android:text="...."
-            />
+            android:layout_toRightOf="@id/itemallday_content"
+            android:text="...." />
 
     </RelativeLayout>
 </layout>

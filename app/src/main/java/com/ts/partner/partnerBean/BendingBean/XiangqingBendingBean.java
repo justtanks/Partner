@@ -17,55 +17,55 @@ public class XiangqingBendingBean {
     String shangbiao;
     String zhizhao;
 
-    public XiangqingBendingBean(LoginBean.DataBean.PartnerAllOrderBean order) {
-        dindanhao = order.getOrder_num();
-        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
-        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
-        shangbiaomingcheng = order.getOrder_name();
-        zongfeiyong = order.getOrder_price();
-        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","    第");
-        zongleibie = str;
-        shangbiao = order.getOrder_pic();
-        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
-    }
-
-    public XiangqingBendingBean(LoginBean.DataBean.PartnerTodayOrderBean order) {
-        dindanhao = order.getOrder_num();
-        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
-        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
-        shangbiaomingcheng = order.getOrder_name();
-        zongfeiyong = order.getOrder_price();
-        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","   第");
-        zongleibie = str;
-        shangbiao = order.getOrder_pic();
-        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
-
-    }
-
-    public XiangqingBendingBean(LoginBean.DataBean.PartnerYesterdayOrderBean order) {
-        dindanhao = order.getOrder_num();
-        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
-        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
-        shangbiaomingcheng = order.getOrder_name();
-        zongfeiyong = order.getOrder_price();
-        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","   第");
-        zongleibie = str;
-        shangbiao = order.getOrder_pic();
-        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
-
-    }
-
-    public XiangqingBendingBean(LoginBean.DataBean.PartnerBeforeYesterdayOrderBean order) {
-        dindanhao = order.getOrder_num();
-        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
-        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
-        shangbiaomingcheng = order.getOrder_name();
-        zongfeiyong = order.getOrder_price();
-        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","   第");
-        zongleibie = str;
-        shangbiao = order.getOrder_pic();
-        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
-    }
+//    public XiangqingBendingBean(LoginBean.DataBean.PartnerAllOrderBean order) {
+//        dindanhao = order.getOrder_num();
+//        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
+//        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
+//        shangbiaomingcheng = order.getOrder_name();
+//        zongfeiyong = order.getOrder_price();
+//        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","    第");
+//        zongleibie = str;
+//        shangbiao = order.getOrder_pic();
+//        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
+//    }
+//
+//    public XiangqingBendingBean(LoginBean.DataBean.PartnerTodayOrderBean order) {
+//        dindanhao = order.getOrder_num();
+//        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
+//        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
+//        shangbiaomingcheng = order.getOrder_name();
+//        zongfeiyong = order.getOrder_price();
+//        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","   第");
+//        zongleibie = str;
+//        shangbiao = order.getOrder_pic();
+//        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
+//
+//    }
+//
+//    public XiangqingBendingBean(LoginBean.DataBean.PartnerYesterdayOrderBean order) {
+//        dindanhao = order.getOrder_num();
+//        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
+//        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
+//        shangbiaomingcheng = order.getOrder_name();
+//        zongfeiyong = order.getOrder_price();
+//        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","   第");
+//        zongleibie = str;
+//        shangbiao = order.getOrder_pic();
+//        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
+//
+//    }
+//
+//    public XiangqingBendingBean(LoginBean.DataBean.PartnerBeforeYesterdayOrderBean order) {
+//        dindanhao = order.getOrder_num();
+//        headImg = order.getOrder_personal_id_card_pic() == null ? order.getOrder_personal_id_card_pic() : order.getOrder_qiye_yingyezhizhao();
+//        zizhi = order.getOrder_qiye_name() == null ? "个人注册" : "企业注册";
+//        shangbiaomingcheng = order.getOrder_name();
+//        zongfeiyong = order.getOrder_price();
+//        String str=order.getOrder_types().replaceAll("\\s*", "").replace("第","   第");
+//        zongleibie = str;
+//        shangbiao = order.getOrder_pic();
+//        zhizhao = order.getOrder_qiye_name() == null ? order.getOrder_qiye_yingyezhizhao() : order.getOrder_personal_getizhizhao();
+//    }
 
     public String getDindanhao() {
         return dindanhao;

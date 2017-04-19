@@ -237,7 +237,7 @@ public class LoginDataBean implements Serializable{
             }
         }
 
-        public static class PartnerInfoBean {
+        public static class PartnerInfoBean implements Serializable{
             /**
              * id : 17
              * partner_account : 18266142739

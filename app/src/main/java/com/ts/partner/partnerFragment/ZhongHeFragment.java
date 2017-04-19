@@ -23,7 +23,6 @@ import java.util.List;
  * Created by Administrator on 2017/4/1.
  * 代理人综合排序的frament  按照综合进行排序
  */
-
 public class ZhongHeFragment extends BaseFragment {
     ListView lv;
     WaiterListActivity activity;
@@ -55,8 +54,5 @@ public class ZhongHeFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-
     }
-
-
 }

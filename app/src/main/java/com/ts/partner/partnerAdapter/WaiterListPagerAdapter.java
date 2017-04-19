@@ -7,18 +7,19 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.ts.partner.partnerFragment.AllOrdersFragment;
 
 import java.util.ArrayList;
+
 /**订单详情界面viewpager的adapter
  *
  */
 
-public class OrderFragmentPagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<AllOrdersFragment> fragmentsList;
+public class WaiterListPagerAdapter extends FragmentPagerAdapter {
+    private ArrayList<Fragment> fragmentsList;
 
-    public OrderFragmentPagerAdapter(FragmentManager fm) {
+    public WaiterListPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public OrderFragmentPagerAdapter(FragmentManager fm, ArrayList<AllOrdersFragment> fragments) {
+    public WaiterListPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
         super(fm);
         this.fragmentsList = fragments;
     }

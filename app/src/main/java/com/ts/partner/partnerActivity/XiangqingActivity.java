@@ -20,39 +20,39 @@ public class XiangqingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_xiangqing);
-        init();
+//        init();
     }
    //昨日 前日 和所有 的实体类是不同的，所以需要根据传过来的id判断解析成不同的数据
-    private void init() {
-        b.dingdanxiangqingBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        int x = getIntent().getIntExtra("id", -1);
-        switch (x) {
-            case -1:
-                break;
-            case 1:
-                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerAllOrderBean) getIntent().getSerializableExtra("datas"));
-                break;
-            case 2:
-                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerTodayOrderBean) getIntent().getSerializableExtra("datas"));
-                break;
-            case 3:
-                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerYesterdayOrderBean) getIntent().getSerializableExtra("datas"));
-                break;
-            case 4:
-                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerBeforeYesterdayOrderBean) getIntent().getSerializableExtra("datas"));
-                break;
-            default:
-                break;
-        }
-        if (bean != null) {
-            b.setXiangqing(bean);
-        }
-    }
+//    private void init() {
+//        b.dingdanxiangqingBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
+//        int x = getIntent().getIntExtra("id", -1);
+//        switch (x) {
+//            case -1:
+//                break;
+//            case 1:
+//                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerAllOrderBean) getIntent().getSerializableExtra("datas"));
+//                break;
+//            case 2:
+//                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerTodayOrderBean) getIntent().getSerializableExtra("datas"));
+//                break;
+//            case 3:
+//                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerYesterdayOrderBean) getIntent().getSerializableExtra("datas"));
+//                break;
+//            case 4:
+//                bean = new XiangqingBendingBean((LoginBean.DataBean.PartnerBeforeYesterdayOrderBean) getIntent().getSerializableExtra("datas"));
+//                break;
+//            default:
+//                break;
+//        }
+//        if (bean != null) {
+//            b.setXiangqing(bean);
+//        }
+//    }
 
     @Override
     protected void onDestroy() {

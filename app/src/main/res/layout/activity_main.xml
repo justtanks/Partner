@@ -87,7 +87,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="5dp"
-                        android:text="@{Datas.todayOrderCount.equals(`0`)?`0`: Datas.todayMoney}"
+                        android:text="@{Datas.todayOrderCount==0?`0`: Datas.todayMoney+``}"
                         android:textColor="@color/titiletextcolor"
                         android:textSize="50sp" />
                 </RelativeLayout>
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{Datas.todayOrderCount}"
+                        android:text="@{Datas.todayOrderCount+``}"
                         android:textColor="@color/titiletextcolor"
                         android:textSize="20sp" />
 
@@ -157,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{Datas.allMoney==null?`0`:Datas.allMoney}"
+                        android:text="@{Datas.allMoney==0?`0`:Datas.allMoney+``}"
                         android:textColor="@color/titiletextcolor"
                         android:textSize="20sp" />
 
@@ -258,12 +258,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/main_yesto_shoyi"
-                android:text="@{Datas.yesdayOrderCount.equals(`0`)?`0`:Datas.yesdayMoney}"
+                android:text="@{Datas.yesdayOrderCount==0?`0`:Datas.yesdayMoney+``}"
                 android:textColor="@color/titiletextcolor"
                 android:textSize="13sp"
-
                 />
-
             <Button
                 android:id="@+id/main_biaodan"
                 android:layout_width="0dp"
@@ -279,17 +277,13 @@
                 android:layout_toRightOf="@+id/main_biaodan"
                 android:text="@string/main_shouyi"
                 android:textSize="13sp" />
-
-
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/main_preyes_shouyi"
-                android:text="@{Datas.beyesdayOrderCount.equals(`0`)?`0`:Datas.beyesdayMoney}"
+                android:text="@{Datas.yesdayMoney+``}"
                 android:textColor="@color/titiletextcolor"
                 android:textSize="13sp" />
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -297,9 +291,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:layout_marginTop="20dp"
-
             >
-
             <TextView
                 android:id="@+id/main_yesto_danshu"
                 android:layout_width="wrap_content"
@@ -314,12 +306,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/main_yesto_danshu"
-                android:text="@{Datas.yesdayOrderCount}"
+                android:text="@{Datas.yesdayOrderCount+``}"
                 android:textColor="@color/titiletextcolor"
                 android:textSize="13sp"
-
                 />
-
             <Button
                 android:id="@+id/main_biaodan2"
                 android:layout_width="0dp"
@@ -341,7 +331,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/main_preyes_danshu"
-                android:text="@{Datas.beyesdayOrderCount}"
+                android:text="@{Datas.yesdayOrderCount+``}"
                 android:textColor="@color/titiletextcolor"
                 android:textSize="13sp" />
 

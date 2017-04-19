@@ -131,6 +131,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 toast(getString(R.string.net_error));
+                loge(ex.getMessage());
 
             }
 
