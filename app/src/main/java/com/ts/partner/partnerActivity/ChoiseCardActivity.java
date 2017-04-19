@@ -75,6 +75,7 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
     //刷新添加的银行卡
     @Subscribe
     public void onEventList(CardBean datas) {
+        this.datas=datas;
         adapter.setDatas(datas.getData());
         adapter.notifyDataSetChanged();
     }

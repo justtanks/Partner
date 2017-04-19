@@ -32,11 +32,11 @@ import org.xutils.common.Callback;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.concurrent.ExecutionException;
 /**
  * Created by Administrator on 2017/2/25.
+ * 首页中我的信息界面
  */
-
 public class MineFragment extends BaseFragment implements View.OnClickListener{
     MineFragmentBinding b;
     ShowMsgInMineBean data;
@@ -44,11 +44,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     LoginDataBean logindatas;
     HomeActivity homeActivity;
     ProgressDialog dialog;
-    SystemUtil su=new SystemUtil(getContext());
+    SystemUtil su;
      @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_mine, container, false);
+         su = new SystemUtil(getActivity());
         return b.getRoot();
     }
 
@@ -136,6 +137,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     }
 
     private void getCardFromNet() {
+        try {
         dialog=ProgressDialog.show(getActivity(),"","正在获取银行卡信息");
         dialog.show();
         Map<String, Object> param = new HashMap<>();
@@ -168,10 +170,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 dialog.dismiss();
             }
         });
+        }catch (Exception e){
+            loge(e.getMessage());
+            dialog.dismiss();
+            toast("软件出现问题，请联系开发者");
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
 }

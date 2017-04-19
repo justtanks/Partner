@@ -116,6 +116,7 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
 
     @Subscribe
     public void onEventList(CardBean  datas) {
+        carddata=datas;
         adatper.setDatas(carddata.getData());
         adatper.notifyDataSetChanged();
     }
