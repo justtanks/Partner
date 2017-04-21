@@ -34,7 +34,6 @@ public class WelcomeActivity extends BaseActivity {
             public void run() {
                 Intent intent=new Intent(WelcomeActivity.this,LoginActivity.class);
                 intent.putExtra("isfresh",isFresh);
-                loge("isfresh",isFresh+"");
                 startActivity(intent);
                 WelcomeActivity.this.finish();
                 if(cancelable!=null){

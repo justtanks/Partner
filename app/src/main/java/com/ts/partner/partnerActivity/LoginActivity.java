@@ -49,8 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bing = DataBindingUtil.setContentView(this, R.layout.activity_login);
-//        autoLogin();
-        mDataEdit = new TestEditLoginBean();
+         mDataEdit = new TestEditLoginBean();
         bing.setPass(mDataEdit);
         init();
     }
@@ -66,13 +65,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         ShareSDK.initSDK(this, "1b82993cdeee3");
         isEnable.put("name", false);
         isEnable.put("pass", false);
+        autoLogin();
     }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_loginbutton:
-                LoginOnNet();
+                logWithPass();
                 break;
             case R.id.login_regist:
                 toRegist();
@@ -92,9 +93,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         Intent intent=new Intent(this,RegistActivity.class);
         startActivity(intent);
     }
-
-    private void LoginOnNet() {
-
+    private  void logWithPass(){
         if (null == mDataEdit.getUserName() || "".equals(mDataEdit.getUserName())) {
             Toast.makeText(this, getResources().getString(R.string.inputyouphonenum), Toast.LENGTH_SHORT).show();
             return;
@@ -103,12 +102,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             toast(getResources().getString(R.string.inputyourpasswiord));
             return;
         }
+        String phone=mDataEdit.getUserName();
+        String pwd=mDataEdit.getUserPassword();
+        LoginOnNet(phone,pwd);
+    }
+
+    private void LoginOnNet(final String phone, final String pwd) {
+
+
         dialog = ProgressDialog.show(this, "提示", "正在登陆");
         dialog.show();
         bing.loginLoginbutton.setEnabled(false);
         Map<String, String> params = new HashMap<>();
-        params.put("partner_tel", mDataEdit.getUserName());
-        params.put("partner_password", mDataEdit.getUserPassword());
+        params.put("partner_tel", phone);
+        params.put("partner_password", pwd);
         cancel = NetUtils.Get(BaseData.LOGIN, params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -123,8 +130,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     LoginDataBean login = gson.fromJson(result, LoginDataBean.class);
                     if ("Success".equals(login.getFlag())) {
                         su.saveUid(Integer.parseInt(login.getData().get(0).getPartner_info().get(0).getId()));
-                        su.savePhone(login.getData().get(0).getPartner_info().get(0).getPartner_account());
-                        su.savePwd(mDataEdit.getUserPassword());
+                        loge(su.showUid()+"");
+                        su.savePhone(phone);
+                        su.savePwd(pwd);
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         intent.putExtra("isfresh", getIntent().getIntExtra("isfresh", 0));
                         intent.putExtra(DATAS_KEY, login);
@@ -277,9 +285,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         if ("".equals(su.showPhone()) || su.showPhone() == null || "".equals(su.showPwd()) || su.showPwd() == null) {
             return;
         } else {
-            Intent intent = new Intent(this, HomeActivity.class);
-            intent.putExtra("isfresh", getIntent().getIntExtra("isfresh", 0));
-            startActivity(intent);
+          LoginOnNet(su.showPhone(),su.showPwd());
         }
     }
 }

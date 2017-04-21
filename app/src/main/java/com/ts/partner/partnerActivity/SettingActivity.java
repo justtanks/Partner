@@ -9,16 +9,21 @@ import android.view.View;
 import com.ts.partner.R;
 import com.ts.partner.databinding.ActivitySettingBinding;
 import com.ts.partner.partnerBase.BaseActivity;
+import com.ts.partner.partnerUtils.SystemUtil;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
     ActivitySettingBinding b;
+    SystemUtil su;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        b= DataBindingUtil.setContentView(this,R.layout.activity_setting);
+        b = DataBindingUtil.setContentView(this, R.layout.activity_setting);
         init();
     }
-    private void init(){
+
+    private void init() {
+        su = new SystemUtil(this);
         b.settingBack.setOnClickListener(this);
         b.settingQuitlogin.setOnClickListener(this);
         b.settingRemovegarbage.setOnClickListener(this);
@@ -28,12 +33,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.setting_back:
                 onBackPressed();
                 break;
             case R.id.setting_quitlogin:
-               quitLog();
+                quitLog();
                 break;
             case R.id.setting_removegarbage:
                 toast(getString(R.string.qingliwancheng));
@@ -44,9 +49,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
         }
     }
+
     //清除数据退出登录
-    private void quitLog(){
-        Intent intent=new Intent(this,LoginActivity.class);
+    private void quitLog() {
+        su.savePhone(null);
+        su.savePwd(null);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         this.finish();
     }

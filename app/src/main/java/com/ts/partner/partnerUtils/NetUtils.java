@@ -17,20 +17,21 @@ public class NetUtils {
 
     public static  <T> Callback.Cancelable Get (String url, Map<String,String> keys, Callback.CommonCallback  <T>callback){
         RequestParams params=new RequestParams(url);
+        params.setConnectTimeout(1000*5);
         if(null!=params){
             for(Map.Entry<String,String> entry:keys.entrySet()){
                 params.addQueryStringParameter(entry.getKey(),entry.getValue());
 
             }
         }
+
         Callback.Cancelable cancelable= x.http().get(params,callback);
         return cancelable;
-
-
     }
     //post
     public static  <T>Callback.Cancelable Post(String url , Map<String,Object> maps, Callback.CommonCallback <T> callback){
         RequestParams params =new RequestParams(url);
+        params.setConnectTimeout(1000*5);
         if(null!=maps){
             for(Map.Entry<String,Object> entry:maps.entrySet()){
                 params.addParameter(entry.getKey(),entry.getValue());

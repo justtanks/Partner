@@ -1,5 +1,7 @@
 package com.ts.partner.partnerBean.netBean;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -158,15 +160,14 @@ public class LoginDataBean implements Serializable{
              * partner_income : 0
              * partner_balance : 200
              */
+            private Integer partner_income;
+            private Integer partner_balance;
 
-            private int partner_income;
-            private int partner_balance;
-
-            public int getPartner_income() {
+            public Integer getPartner_income() {
                 return partner_income;
             }
 
-            public void setPartner_income(int partner_income) {
+            public void setPartner_income(Integer partner_income) {
                 this.partner_income = partner_income;
             }
 

@@ -149,6 +149,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 @Override
                 public void onSuccess(String result) {
                     if (result.substring(0, 18).contains("Error")) {
+                        NetError error=new Gson().fromJson(result,NetError.class);
+                        if(error.getMsg().equals("0")){
+                            Intent intent = new Intent(getActivity(), CardActivity.class);
+                            startActivity(intent);
+                        }else {
+                            toast("您还没有进行认证，无法获取银行卡信息");
+                        }
                         return;
                     } else {
                         CardBean card = new Gson().fromJson(result, CardBean.class);

@@ -23,6 +23,13 @@ public class ShowMsgInMineBean extends BaseObservable implements Serializable {
 
     public ShowMsgInMineBean(LoginDataBean.DataBean bean) {
         this.phone=bean.getPartner_info().get(0).getPartner_account();
+        StringBuilder builder=new StringBuilder();
+        if(bean.getAgent_county()!=null){
+            for(LoginDataBean.DataBean.AgentCountyBean co :bean.getAgent_county()){
+                builder.append(co.getAgent()).append(",");
+            }
+            this.location=builder.substring(0,builder.length()-1);
+        }
     }
     @Bindable
     public String getName() {

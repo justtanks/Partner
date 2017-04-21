@@ -67,37 +67,59 @@ public class DatasInMain {
     }
 
     public DatasInMain(LoginDataBean.DataBean bean) {
-       if(bean!=null&&bean.getToday_money()!=null){
-           for(LoginDataBean.DataBean.MoneyBean mon:bean.getToday_money()){
-               this.todayMoney+=mon.getMoney();
-           }
-       }
-        for(LoginDataBean.DataBean.MoneyBean mon:bean.getYesterday_money()){
-            this.yesdayMoney+=mon.getMoney();
+        if (bean != null) {
+
+
+            if (bean != null && bean.getToday_money() != null) {
+                for (LoginDataBean.DataBean.MoneyBean mon : bean.getToday_money()) {
+                    this.todayMoney += mon.getMoney();
+                }
+            }
+            if (bean != null && bean.getYesterday_money() != null) {
+                for (LoginDataBean.DataBean.MoneyBean mon : bean.getYesterday_money()) {
+                    this.yesdayMoney += mon.getMoney();
+                }
+            }
+            if (bean.getAll_order() != null) {
+                this.allorders = bean.getAll_order().size();
+            }
+            if (bean.getToday_order() != null) {
+                this.todayOrderCount = bean.getToday_order().size();
+            }
+            if (bean.getYesterday_order() != null) {
+                this.yesdayOrderCount = bean.getYesterday_order().size();
+            }
+            if (bean.getPartner_infos() != null) {
+                if (bean.getPartner_infos().get(0) != null) {
+                    if(bean.getPartner_infos().get(0).getPartner_income()!=null){
+                        this.allMoney = bean.getPartner_infos().get(0).getPartner_income();
+                    }
+
+                    this.ketixian = bean.getPartner_infos().get(0).getPartner_balance();
+                } else {
+                    this.allMoney = 0;
+                    this.ketixian = 0;
+
+                }
+            }
         }
-        this.allorders=bean.getAll_order().size();
-        this.todayOrderCount = bean.getToday_order().size();
-        this.yesdayOrderCount = bean.getYesterday_order().size();
-        this.allMoney = bean.getPartner_infos().get(0).getPartner_income();
-        this.ketixian=bean.getPartner_infos().get(0).getPartner_balance();
         getdayTime();
 
     }
 
-//    private String getTodaytime(){
+    //    private String getTodaytime(){
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日:");
 //        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
 //       return formatter.format(curDate);
 //    }
-    private void getdayTime(){
+    private void getdayTime() {
         Date today = new Date();
-        this.todayTime=new SimpleDateFormat("yyyy年MM月dd日:").format(today);
+        this.todayTime = new SimpleDateFormat("yyyy年MM月dd日:").format(today);
         Date yesterday = new Date(today.getTime() - 86400000L);
-       this.yestodaytime= new SimpleDateFormat("yyyy年MM月dd日:").format(yesterday);
-        Date beforeyestoday=new Date(yesterday.getTime()-86400000L);
-        this.beforyedaytime=new SimpleDateFormat("yyyy年MM月dd日:").format(beforeyestoday);
+        this.yestodaytime = new SimpleDateFormat("yyyy年MM月dd日:").format(yesterday);
+        Date beforeyestoday = new Date(yesterday.getTime() - 86400000L);
+        this.beforyedaytime = new SimpleDateFormat("yyyy年MM月dd日:").format(beforeyestoday);
     }
-
 
 
     public DatasInMain() {

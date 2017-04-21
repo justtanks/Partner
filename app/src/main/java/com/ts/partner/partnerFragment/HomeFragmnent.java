@@ -92,9 +92,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
     //判断是否有银行卡 没有就先添加银行卡
     private void jumpToMyCard(CardBean card) {
         if (card.getData().size()==0) {
-            toast("请先添加银行卡");
-            Intent intent = new Intent(homeActivity, CardActivity.class);
-            startActivity(intent);
+
             return;
         }
         Intent intent = new Intent(homeActivity, DrawCashActivity.class);
@@ -108,7 +106,7 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
           dialog=ProgressDialog.show(getContext(),"","正在获取订单信息");
           dialog.show();
           Map<String,Object>param=new HashMap<>();
-         param.put("partner_id",su.showUid()+"");
+          param.put("partner_id",su.showUid()+"");
           NetUtils.Post(BaseData.GETORDERS, param, new Callback.CommonCallback<String>() {
               @Override
               public void onSuccess(String result) {
@@ -117,9 +115,12 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
                       toast(error.getMsg());
                   }else {
                       OrdersBean orders=new Gson().fromJson(result,OrdersBean.class);
+                      if(orders.getData()==null||orders.getData().size()==0){
+                          toast("您暂时没有订单");
+                          return;
+                      }
                       Intent intent = new Intent(homeActivity, OrdersActivity.class);
                       intent.putExtra(LoginActivity.DATAS_KEY, orders);
-                      Log.e("log",result);
                       startActivity(intent);
                   }
               }
@@ -164,6 +165,14 @@ public class HomeFragmnent extends BaseFragment implements View.OnClickListener,
             @Override
             public void onSuccess(String result) {
                 if (result.substring(0, 18).contains("Error")) {
+                    NetError error=new Gson().fromJson(result,NetError.class);
+                    if(error.getMsg().equals("0")){
+                        toast("请先添加银行卡");
+                        Intent intent = new Intent(homeActivity, CardActivity.class);
+                        startActivity(intent);
+                    }else {
+                        toast("您还没有进行认证，无法获取银行卡信息");
+                    }
                     return;
                 } else {
                     CardBean card = new Gson().fromJson(result, CardBean.class);
