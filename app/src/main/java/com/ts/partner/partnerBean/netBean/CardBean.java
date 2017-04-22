@@ -108,5 +108,26 @@ public class CardBean implements Serializable{
         public void setAdd_time(String add_time) {
             this.add_time = add_time;
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "id='" + id + '\'' +
+                    ", pid='" + pid + '\'' +
+                    ", bank_name='" + bank_name + '\'' +
+                    ", card_num='" + card_num + '\'' +
+                    ", add_time='" + add_time + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "CardBean{" +
+                "flag='" + flag + '\'' +
+                ", msg='" + msg + '\'' +
+                ", num=" + num +
+                ", data=" + data +
+                '}';
     }
 }

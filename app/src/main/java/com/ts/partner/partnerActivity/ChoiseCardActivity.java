@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 
 import com.ts.partner.R;
@@ -24,26 +25,34 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
     ChoiseCardBinding b;
     CardBean datas = null;
     ChoiseCardLvAdapter adapter;
-    private Intent intent;
     public static final int FROM_CHOISCARD = 11111;
+    Intent fromDrawCashIntent;  //从提现界面传过来的intent
     Handler handler = new Handler();
      SystemUtil su=new SystemUtil(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-    }
 
+    }
     private void init() {
         b = DataBindingUtil.setContentView(this, R.layout.activity_choise_card);
         b.choisecardNewcard.setOnClickListener(this);
         b.choisecardReback.setOnClickListener(this);
-        intent = getIntent();
-        datas = (CardBean) intent.getSerializableExtra("datas");
+        b.choisecardLb.setOnItemClickListener(this);
+        fromDrawCashIntent=getIntent();
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        datas = (CardBean) getIntent().getSerializableExtra("datas");
         adapter = new ChoiseCardLvAdapter(this, datas.getData());
         b.choisecardLb.setAdapter(adapter);
-        b.choisecardLb.setOnItemClickListener(this);
-        EventBus.getDefault().register(this);
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
     }
 
     Runnable runnable1 = new Runnable() {
@@ -72,13 +81,13 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
                 break;
         }
     }
-    //刷新添加的银行卡
-    @Subscribe
-    public void onEventList(CardBean datas) {
-        this.datas=datas;
-        adapter.setDatas(datas.getData());
-        adapter.notifyDataSetChanged();
-    }
+//    //刷新添加的银行卡
+//    @Subscribe
+//    public void onEventList(CardBean datas) {
+//        this.datas=datas;
+//        adapter.setDatas(datas.getData());
+//        adapter.notifyDataSetChanged();
+//    }
     //添加银行卡
     private void addcard() {
         b.choisecardDuihao.setVisibility(View.VISIBLE);
@@ -96,8 +105,8 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
         CardBean.DataBean choisedCard = datas.getData().get(position);
         Bundle bundle = new Bundle();
         bundle.putSerializable("datas1", choisedCard);
-        intent.putExtras(bundle);
-        setResult(DrawCashActivity.TOGETCARD, intent);
+        fromDrawCashIntent.putExtras(bundle);
+        setResult(DrawCashActivity.TOGETCARD, fromDrawCashIntent);
         handler.postDelayed(runnable2, 600);
     }
 
@@ -111,7 +120,7 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
         handler.removeCallbacks(runnable1);
         handler.removeCallbacks(runnable2);
         datas=null;

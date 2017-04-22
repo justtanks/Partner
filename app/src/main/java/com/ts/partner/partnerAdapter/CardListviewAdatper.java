@@ -29,17 +29,18 @@ public class CardListviewAdatper extends BaseAdapter {
         this.inflater = LayoutInflater.from(context);
 
     }
-    public void setDatas(List<CardBean.DataBean> datas){
-        this.datas=datas;
+
+    public void setDatas(List<CardBean.DataBean> datas) {
+        this.datas = datas;
 //        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        if(datas!=null){
+        if (datas != null) {
             return datas.size();
-        }else {
-         return 0;
+        } else {
+            return 0;
         }
     }
 
@@ -67,17 +68,17 @@ public class CardListviewAdatper extends BaseAdapter {
         } else {
             holder = (TViewHolder) convertView.getTag();
         }
-        if(datas!=null&&datas.size()!=0){
+        if (datas != null && datas.size() != 0) {
             CardBean.DataBean data = datas.get(position);
             String bankname = data.getBank_name();
-            StringBuffer cardnum=new StringBuffer(data.getCard_num());
-            String str=null;
-            if(cardnum.length()>4){
-              str=cardnum.substring(cardnum.length()-4,cardnum.length());
-            }else {
-                str=cardnum.toString();
+            StringBuffer cardnum = new StringBuffer(data.getCard_num());
+            String str = null;
+            if (cardnum.length() > 4) {
+                str = cardnum.substring(cardnum.length() - 4, cardnum.length());
+            } else {
+                str = cardnum.toString();
             }
-            holder.cardnum.setText("**** **** **** "+str);
+            holder.cardnum.setText("**** **** **** " + str);
             holder.cardBankName.setText(bankname);
             if (bankname.contains("中国银行")) {
                 holder.headImg.setImageResource(R.mipmap.bank_zhonghang);

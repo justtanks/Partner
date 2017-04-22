@@ -3,6 +3,7 @@ package com.ts.partner.partnerActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,12 +30,13 @@ public class AddcardDoneActivity extends BaseActivity {
     SystemUtil su = new SystemUtil(this);
     ProgressDialog dialog;
     int processid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcard_done);
         done = (Button) this.findViewById(R.id.carddone_complete);
-        processid=su.showModle();
+        processid = su.showModle();
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +54,7 @@ public class AddcardDoneActivity extends BaseActivity {
     同步关于银行卡的信息
      */
     Callback.Cancelable cancel;
-    CardBean cardBean;
+
     //18253487693
 
     private void update() {
@@ -71,27 +73,25 @@ public class AddcardDoneActivity extends BaseActivity {
                     error = null;
                     return;
                 } else {
-                     cardBean = gson.fromJson(result, CardBean.class);
-                    if ("Success".equals(cardBean.getFlag())) {
-                        EventBus.getDefault().post(cardBean);
-                        switch (processid){
-                            case 0:
-                                toast("bug");
-                                break;
-                            case 1:
-                                Intent intent=new Intent(AddcardDoneActivity.this,ChoiseCardActivity.class);
-                                startActivity(intent);
-                                break;
-                            case 2:
-                                Intent intent1 = new Intent(AddcardDoneActivity.this, CardActivity.class);
-                                startActivity(intent1);
-                                break;
-                        }
-                    } else {
-                        return;
+                    CardBean cardBean = gson.fromJson(result, CardBean.class);
+                    switch (processid) {
+                        case 0:
+                            toast("bug");
+                            break;
+                        case 1:
+                            Intent intent = new Intent(AddcardDoneActivity.this, ChoiseCardActivity.class);
+                            intent.putExtra("datas", cardBean);
+                            startActivity(intent);
+                            break;
+                        case 2:
+                            Intent intent1 = new Intent(AddcardDoneActivity.this, CardActivity.class);
+                            intent1.putExtra(HomeActivity.MAIN_KEY, cardBean);
+                            startActivity(intent1);
+                            break;
                     }
                 }
             }
+
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 toast(getString(R.string.net_error));

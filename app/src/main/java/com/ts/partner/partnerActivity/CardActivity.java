@@ -48,15 +48,33 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
+
     }
 
     private void init(){
-        EventBus.getDefault().register(this);
+
         builder = new AlertDialog.Builder(this);
         bingding= DataBindingUtil.setContentView(this,R.layout.activity_card);
         bingding.cardAddnewcard.setOnClickListener(this);
         bingding.cardBacktext.setOnClickListener(this);
         bingding.cardLv.setOnItemLongClickListener(this);
+//        carddata= (CardBean) getIntent().getSerializableExtra(HomeActivity.MAIN_KEY);
+//        if(carddata!=null&&carddata.getData()!=null){
+//            adatper=new CardListviewAdatper(this,carddata.getData());
+//            bingding.cardLv.setAdapter(adatper);
+//        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loge("onstart");
         carddata= (CardBean) getIntent().getSerializableExtra(HomeActivity.MAIN_KEY);
         if(carddata!=null&&carddata.getData()!=null){
             adatper=new CardListviewAdatper(this,carddata.getData());
@@ -64,6 +82,11 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loge("onrestart");
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -114,8 +137,13 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
 
     }
 
-    @Subscribe
-    public void onEventList(CardBean  datas) {
+//    @Subscribe
+//    public void onEventList(CardBean  datas) {
+//        carddata=datas;
+//        adatper.setDatas(carddata.getData());
+//        adatper.notifyDataSetChanged();
+//    }
+    private void setCard(CardBean  datas){
         carddata=datas;
         adatper.setDatas(carddata.getData());
         adatper.notifyDataSetChanged();
@@ -124,7 +152,6 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
         su=null;
         adatper=null;
         carddata=null;
@@ -219,6 +246,7 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
         });
     }
     //从新请求网络加载银行卡数据  adapter重新加载数据
+
     private void freshData() {
         Map<String, Object> param = new HashMap<>();
         param.put("partner_id", su.showUid());
@@ -226,13 +254,19 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
             @Override
             public void onSuccess(String result) {
 
+
                 if (result.substring(0, 18).contains("Error")) {
                     NetError error = gson.fromJson(result, NetError.class);
-                    toast(error.getMsg());
+                    if(error.getMsg().equals("0")){
+//                        EventBus.getDefault().post(new CardBean());
+                        setCard(new CardBean());
+                    }
+
                 } else {
                     CardBean login = gson.fromJson(result, CardBean.class);
                     if(login.getFlag().equals("Success")){
-                        EventBus.getDefault().post(login);
+//                        EventBus.getDefault().post(login);
+                        setCard(login);
                     }
 
                 }

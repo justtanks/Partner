@@ -15,6 +15,7 @@ import com.ts.partner.R;
 import com.ts.partner.databinding.PhoneTestBinding;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
+import com.ts.partner.partnerBean.netBean.LoginDataBean;
 import com.ts.partner.partnerBean.netBean.Regist_phoneback;
 import com.ts.partner.partnerUtils.NetUtils;
 
@@ -156,6 +157,7 @@ public class PhoneTestActivity extends BaseActivity implements View.OnClickListe
             public void onSuccess(String result) {
                 Gson gson = new Gson();
                 Regist_phoneback phoneMsg = gson.fromJson(result, Regist_phoneback.class);
+                loge("yinhangname"+phoneMsg.getMsg());
                 yanzhen=phoneMsg.getMsg();
 
 

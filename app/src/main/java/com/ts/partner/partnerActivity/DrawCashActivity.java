@@ -81,8 +81,13 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
         buttonTixian.setOnClickListener(this);
         moneyEdit.addTextChangedListener(new MyTextWathcer());
         datas = (LoginDataBean.DataBean) getIntent().getSerializableExtra("datas");
-        cards= (CardBean) getIntent().getSerializableExtra("cards");
-        currentnum.setText("可提现余额" + datas.getPartner_infos().get(0).getPartner_balance() + "元");
+        cards = (CardBean) getIntent().getSerializableExtra("cards");
+        if (datas.getPartner_infos() != null) {
+            currentnum.setText("可提现余额" + datas.getPartner_infos().get(0).getPartner_balance() + "元");
+        } else {
+            currentnum.setText("可提现余额" + 0 + "元");
+        }
+
         setName(cards.getData().get(0));
     }
 
@@ -139,7 +144,7 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == TOGETCARD) {
             Bundle bundle = data.getExtras();
-           CardBean.DataBean datas = (  CardBean.DataBean) bundle.getSerializable("datas1");
+            CardBean.DataBean datas = (CardBean.DataBean) bundle.getSerializable("datas1");
             setName(datas);
         }
     }
@@ -232,7 +237,12 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void quanbutixian() {
-        moneyEdit.setText(datas.getPartner_infos().get(0).getPartner_balance()+"");
+        if (datas.getPartner_infos() != null) {
+            moneyEdit.setText(datas.getPartner_infos().get(0).getPartner_balance() + "");
+        } else {
+            moneyEdit.setText("0");
+        }
+
     }
 
 
@@ -259,12 +269,14 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
             }
             int num = Integer.parseInt(money);
             if (num > 0) {
-                if (num > datas.getPartner_infos().get(0).getPartner_balance()) {
-                    toast("超出可提现余额，不能提现");
-                    setButton(false);
-                    return;
-                } else {
-                    setButton(true);
+                if (datas.getPartner_infos() != null) {
+                    if (num > datas.getPartner_infos().get(0).getPartner_balance()) {
+                        toast("超出可提现余额，不能提现");
+                        setButton(false);
+                        return;
+                    } else {
+                        setButton(true);
+                    }
                 }
 
             } else {
@@ -349,10 +361,10 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        datas=null;
-        su=null;
-        mPopuwindow=null;
-        cancel=null;
-        waitDialog=null;
+        datas = null;
+        su = null;
+        mPopuwindow = null;
+        cancel = null;
+        waitDialog = null;
     }
 }
