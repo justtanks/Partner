@@ -105,11 +105,11 @@ public class ChoiseCardActivity extends BaseActivity implements View.OnClickList
         CardBean.DataBean choisedCard = datas.getData().get(position);
         Bundle bundle = new Bundle();
         bundle.putSerializable("datas1", choisedCard);
+        bundle.putSerializable("datas2",datas);
         fromDrawCashIntent.putExtras(bundle);
         setResult(DrawCashActivity.TOGETCARD, fromDrawCashIntent);
         handler.postDelayed(runnable2, 600);
     }
-
 
     @Override
     protected void onStop() {

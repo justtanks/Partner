@@ -56,12 +56,13 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
     @ViewInject(R.id.tixian_bank)
     TextView bankName;
     private LoginDataBean.DataBean datas = null;
-    private CardBean cards;
+    private CardBean cards; //存放所有银行卡信息
     private String bankname;
     private String bankNum;
     SystemUtil su = new SystemUtil(this);
     //进入银行卡选择界面后返回的标识
     public static final int TOGETCARD = 1;
+    public static  final  int BACK=2;
     ProgressDialog waitDialog = null;
 
     @Override
@@ -73,7 +74,6 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void init() {
-
         changecard.setOnClickListener(this);
         backre.setOnClickListener(this);
         backText.setOnClickListener(this);
@@ -145,6 +145,8 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
         if (resultCode == TOGETCARD) {
             Bundle bundle = data.getExtras();
             CardBean.DataBean datas = (CardBean.DataBean) bundle.getSerializable("datas1");
+            cards= (CardBean) bundle.getSerializable("datas2");
+            loge(cards.getData().size()+"cardata");
             setName(datas);
         }
     }
@@ -270,13 +272,17 @@ public class DrawCashActivity extends BaseActivity implements View.OnClickListen
             int num = Integer.parseInt(money);
             if (num > 0) {
                 if (datas.getPartner_infos() != null) {
-                    if (num > datas.getPartner_infos().get(0).getPartner_balance()) {
-                        toast("超出可提现余额，不能提现");
-                        setButton(false);
-                        return;
-                    } else {
-                        setButton(true);
+                    String ketixian=datas.getPartner_infos().get(0).getPartner_balance();
+                    if(null!=ketixian&&!"".equals(ketixian)){
+                        if (num > Integer.parseInt(ketixian)) {
+                            toast("超出可提现余额，不能提现");
+                            setButton(false);
+                            return;
+                        } else {
+                            setButton(true);
+                        }
                     }
+
                 }
 
             } else {

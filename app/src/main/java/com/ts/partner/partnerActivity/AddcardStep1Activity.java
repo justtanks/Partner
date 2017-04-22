@@ -58,8 +58,8 @@ public class AddcardStep1Activity extends BaseActivity implements View.OnClickLi
     private void jumpToFillcardMsg(){
         String carnum=b.addcardStep1Cardnum.getText().toString();
         String cardCity= BankUtil.getNameOfBank(carnum);
-        if("-1".equals(cardCity)){
-            toast("请输入正确的卡号");
+        if("0000".equals(cardCity)){
+            toast("卡号不正确，请输入正确的卡号");
             return;
         }
         Intent intent = new Intent(this, FillCardMsgActivity.class);

@@ -17,7 +17,6 @@ import com.ts.partner.databinding.CardBinding;
 import com.ts.partner.partnerAdapter.CardListviewAdatper;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBase.BaseData;
-import com.ts.partner.partnerBean.BendingBean.ShowMsgInMineBean;
 import com.ts.partner.partnerBean.netBean.CardBean;
 import com.ts.partner.partnerBean.netBean.DeleteCardSuccess;
 import com.ts.partner.partnerBean.netBean.IsHadPasswordBean;
@@ -25,10 +24,7 @@ import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerUtils.NetUtils;
 import com.ts.partner.partnerUtils.SystemUtil;
 import com.ts.partner.partnerViews.PwdEditText;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 import org.xutils.common.Callback;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,19 +46,12 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
         init();
 
     }
-
     private void init(){
-
         builder = new AlertDialog.Builder(this);
         bingding= DataBindingUtil.setContentView(this,R.layout.activity_card);
         bingding.cardAddnewcard.setOnClickListener(this);
         bingding.cardBacktext.setOnClickListener(this);
         bingding.cardLv.setOnItemLongClickListener(this);
-//        carddata= (CardBean) getIntent().getSerializableExtra(HomeActivity.MAIN_KEY);
-//        if(carddata!=null&&carddata.getData()!=null){
-//            adatper=new CardListviewAdatper(this,carddata.getData());
-//            bingding.cardLv.setAdapter(adatper);
-//        }
     }
 
     @Override
@@ -74,7 +63,6 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
     @Override
     protected void onStart() {
         super.onStart();
-        loge("onstart");
         carddata= (CardBean) getIntent().getSerializableExtra(HomeActivity.MAIN_KEY);
         if(carddata!=null&&carddata.getData()!=null){
             adatper=new CardListviewAdatper(this,carddata.getData());
@@ -82,11 +70,6 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        loge("onrestart");
-    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -137,12 +120,6 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
 
     }
 
-//    @Subscribe
-//    public void onEventList(CardBean  datas) {
-//        carddata=datas;
-//        adatper.setDatas(carddata.getData());
-//        adatper.notifyDataSetChanged();
-//    }
     private void setCard(CardBean  datas){
         carddata=datas;
         adatper.setDatas(carddata.getData());
@@ -253,22 +230,17 @@ public class CardActivity extends BaseActivity implements View.OnClickListener,A
         NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-
-
                 if (result.substring(0, 18).contains("Error")) {
                     NetError error = gson.fromJson(result, NetError.class);
                     if(error.getMsg().equals("0")){
-//                        EventBus.getDefault().post(new CardBean());
                         setCard(new CardBean());
                     }
 
                 } else {
                     CardBean login = gson.fromJson(result, CardBean.class);
                     if(login.getFlag().equals("Success")){
-//                        EventBus.getDefault().post(login);
                         setCard(login);
                     }
-
                 }
             }
 

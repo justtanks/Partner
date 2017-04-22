@@ -90,12 +90,21 @@ public class DatasInMain {
                 this.yesdayOrderCount = bean.getYesterday_order().size();
             }
             if (bean.getPartner_infos() != null) {
-                if (bean.getPartner_infos().get(0) != null) {
-                    if(bean.getPartner_infos().get(0).getPartner_income()!=null){
-                        this.allMoney = bean.getPartner_infos().get(0).getPartner_income();
-                    }
 
-                    this.ketixian = bean.getPartner_infos().get(0).getPartner_balance();
+                if (bean.getPartner_infos().get(0) != null) {
+                    String income=bean.getPartner_infos().get(0).getPartner_income();
+                    if(null!=income&&!"".equals(income)){
+                        int incom=Integer.parseInt(income);
+                        this.allMoney = incom;
+                    }else {
+                        this.allMoney=0;
+                    }
+                    String banlance=bean.getPartner_infos().get(0).getPartner_balance();
+                    if(null!=banlance&&!"".equals(banlance)){
+                        this.ketixian =Integer.parseInt(banlance) ;
+                    }else{
+                        this.ketixian=0;
+                    }
                 } else {
                     this.allMoney = 0;
                     this.ketixian = 0;

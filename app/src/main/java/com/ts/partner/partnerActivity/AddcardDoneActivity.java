@@ -1,12 +1,9 @@
 package com.ts.partner.partnerActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import com.google.gson.Gson;
 import com.ts.partner.R;
 import com.ts.partner.partnerBase.BaseActivity;
@@ -15,10 +12,7 @@ import com.ts.partner.partnerBean.netBean.CardBean;
 import com.ts.partner.partnerBean.netBean.NetError;
 import com.ts.partner.partnerUtils.NetUtils;
 import com.ts.partner.partnerUtils.SystemUtil;
-
-import org.greenrobot.eventbus.EventBus;
 import org.xutils.common.Callback;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,9 +48,6 @@ public class AddcardDoneActivity extends BaseActivity {
     同步关于银行卡的信息
      */
     Callback.Cancelable cancel;
-
-    //18253487693
-
     private void update() {
         dialog = ProgressDialog.show(this, "", "同步信息中");
         dialog.show();
@@ -70,7 +61,6 @@ public class AddcardDoneActivity extends BaseActivity {
                 if (cutResult.contains("Error")) {
                     NetError error = gson.fromJson(result, NetError.class);
                     toast(error.getMsg());
-                    error = null;
                     return;
                 } else {
                     CardBean cardBean = gson.fromJson(result, CardBean.class);
@@ -91,7 +81,6 @@ public class AddcardDoneActivity extends BaseActivity {
                     }
                 }
             }
-
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 toast(getString(R.string.net_error));

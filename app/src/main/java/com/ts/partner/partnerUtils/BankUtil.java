@@ -11,7 +11,7 @@ public class BankUtil {
         int index = -1;
         if(idCard==null || idCard.length()<16 || idCard.length()>19){
             Log.e("log",1+"");
-            return "-1";
+            return "0000";
         }
 //6位Bin号
         String cardbin_6 = idCard.substring(0, 6);
@@ -36,7 +36,7 @@ public class BankUtil {
         if (index != -1) {
             return bankName[index];
         }
-        return "无法识别银行卡所属银行名称";
+        return "0000";
     }
 
     //BIN号

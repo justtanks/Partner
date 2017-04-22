@@ -160,22 +160,22 @@ public class LoginDataBean implements Serializable{
              * partner_income : 0
              * partner_balance : 200
              */
-            private Integer partner_income;
-            private Integer partner_balance;
+            private String partner_income;
+            private String partner_balance;
 
-            public Integer getPartner_income() {
+            public String getPartner_income() {
                 return partner_income;
             }
 
-            public void setPartner_income(Integer partner_income) {
+            public void setPartner_income(String partner_income) {
                 this.partner_income = partner_income;
             }
 
-            public int getPartner_balance() {
+            public String getPartner_balance() {
                 return partner_balance;
             }
 
-            public void setPartner_balance(int partner_balance) {
+            public void setPartner_balance(String partner_balance) {
                 this.partner_balance = partner_balance;
             }
         }
