@@ -156,6 +156,13 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    @Subscribe
+    public void onEvent(String datas) {
+         if(datas.equals("guanbizhujiemian")){
+             this.finish();
+         }
+    }
+
     public ShareMesBean getShareDatas() {
         return sharebean;
     }

@@ -65,7 +65,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         ShareSDK.initSDK(this, "1b82993cdeee3");
         isEnable.put("name", false);
         isEnable.put("pass", false);
-        autoLogin();
+//        autoLogin();
     }
 
 
@@ -109,7 +109,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private void LoginOnNet(final String phone, final String pwd) {
 
-
         dialog = ProgressDialog.show(this, "提示", "正在登陆");
         dialog.show();
         bing.loginLoginbutton.setEnabled(false);
@@ -137,8 +136,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         intent.putExtra("isfresh", getIntent().getIntExtra("isfresh", 0));
                         intent.putExtra(DATAS_KEY, login);
                         startActivityForResult(intent, 1);
-                        startActivity(intent);
-                        login = null;
+                         login = null;
                     } else {
                         login = null;
                         return;
@@ -279,13 +277,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         bing = null;
     }
 
-    //添加自动登录
-    //自动登录
-    private void autoLogin() {
-        if ("".equals(su.showPhone()) || su.showPhone() == null || "".equals(su.showPwd()) || su.showPwd() == null) {
-            return;
-        } else {
-          LoginOnNet(su.showPhone(),su.showPwd());
-        }
-    }
+//    //添加自动登录
+//    //自动登录
+//    private void autoLogin() {
+//        if ("".equals(su.showPhone()) || su.showPhone() == null || "".equals(su.showPwd()) || su.showPwd() == null) {
+//            return;
+//        } else {
+//          LoginOnNet(su.showPhone(),su.showPwd());
+//        }
+//    }
 }

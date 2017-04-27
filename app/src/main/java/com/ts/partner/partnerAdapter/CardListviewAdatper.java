@@ -32,7 +32,7 @@ public class CardListviewAdatper extends BaseAdapter {
 
     public void setDatas(List<CardBean.DataBean> datas) {
         this.datas = datas;
-//        notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override

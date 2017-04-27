@@ -56,18 +56,22 @@
         </RelativeLayout>
 
     </RelativeLayout>
-    <ListView
-
-        android:id="@+id/card_lv"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/card_fresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="14dp"
+        >
+    <ListView
+        android:id="@+id/card_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scrollbars="none"
         android:divider="#00000000"
         android:dividerHeight="2dp"
         ></ListView>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
 </layout>

@@ -2,6 +2,8 @@ package com.ts.partner.partnerActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+
 import com.google.gson.Gson;
 import com.ts.partner.R;
 import com.ts.partner.partnerBase.BaseActivity;
@@ -37,6 +39,7 @@ public class AddCardInputPassWorldActivity extends BaseActivity {
             @Override
             public void onInputFinish(String password) {
                  addCardToNet(password);
+
             }
         });
     }

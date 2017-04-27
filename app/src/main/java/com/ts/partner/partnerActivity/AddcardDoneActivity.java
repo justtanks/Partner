@@ -88,6 +88,8 @@ public class AddcardDoneActivity extends BaseActivity {
 
             @Override
             public void onCancelled(CancelledException cex) {
+                //to  achieve largest  user-base possible for your app you need
+                //to strive to support as many device configrations as possible in one single apk
             }
 
             @Override

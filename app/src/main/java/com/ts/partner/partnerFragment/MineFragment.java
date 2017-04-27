@@ -73,13 +73,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mine_mycard:
-                getCardFromNet();
+                toCards();
                 break;
             case R.id.mine_setting:
                 toSetting();
                 break;
             case R.id.mine_dailiren:
-                toDailiren();
+//                toDailiren();
+                toWaiters();
                 break;
             case R.id.mine_area:
                 toArea();
@@ -102,6 +103,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
   跳转到代理人名片列表界面
   */
 
+    private void toWaiters(){
+        Intent intent = new Intent(getActivity(), WaiterListActivity.class);
+        startActivity(intent);
+    }
     private void toDailiren() {
         dialog = ProgressDialog.show(getActivity(), "", "正在获取代理人列表");
         dialog.show();
@@ -139,52 +144,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         });
     }
 
-    private void getCardFromNet() {
-        try {
-            dialog = ProgressDialog.show(getActivity(), "", "正在获取银行卡信息");
-            dialog.show();
-            Map<String, Object> param = new HashMap<>();
-            param.put("partner_id", su.showUid());
-            NetUtils.Post(BaseData.GETCARDS, param, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    if (result.substring(0, 18).contains("Error")) {
-                        NetError error=new Gson().fromJson(result,NetError.class);
-                        if(error.getMsg().equals("0")){
-                            Intent intent = new Intent(getActivity(), CardActivity.class);
-                            startActivity(intent);
-                        }else {
-                            toast("您还没有进行认证，无法获取银行卡信息");
-                        }
-                        return;
-                    } else {
-                        CardBean card = new Gson().fromJson(result, CardBean.class);
-                        Intent intent = new Intent(getActivity(), CardActivity.class);
-                        intent.putExtra(HomeActivity.MAIN_KEY, card);
-                        startActivity(intent);
-                    }
-                }
-
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
-
-                }
-
-                @Override
-                public void onCancelled(CancelledException cex) {
-
-                }
-
-                @Override
-                public void onFinished() {
-                    dialog.dismiss();
-                }
-            });
-        } catch (Exception e) {
-            loge(e.getMessage());
-            dialog.dismiss();
-            toast("软件出现问题，请联系开发者");
-        }
+    private void toCards() {
+        Intent intent = new Intent(getActivity(), CardActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -11,6 +11,8 @@ import com.ts.partner.databinding.ActivitySettingBinding;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerUtils.SystemUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
     ActivitySettingBinding b;
     SystemUtil su;
@@ -56,6 +58,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         su.savePwd(null);
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        EventBus.getDefault().post("guanbizhujiemian");
         this.finish();
+
     }
 }
