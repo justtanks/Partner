@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.ts.partner.R;
 import com.ts.partner.databinding.OrderBinding;
 import com.ts.partner.partnerAdapter.OrderFragmentPagerAdapter;
+import com.ts.partner.partnerAdapter.simpleAdapter.OrderPagerAdapter;
 import com.ts.partner.partnerBase.BaseActivity;
 import com.ts.partner.partnerBean.netBean.OrdersBean;
 import com.ts.partner.partnerFragment.AllOrdersFragment;
@@ -106,7 +107,7 @@ public class OrdersActivity extends BaseActivity implements View.OnClickListener
          }
         b.orderViewpager.setCurrentItem(0);
         b.orderViewpager.setOffscreenPageLimit(4);
-        b.orderViewpager.setAdapter(new OrderFragmentPagerAdapter(getSupportFragmentManager(), fragmentList));
+        b.orderViewpager.setAdapter(new OrderPagerAdapter(getSupportFragmentManager(), fragmentList));
         b.orderViewpager.addOnPageChangeListener(this);
     }
     @Override

@@ -27,21 +27,6 @@
                 android:layout_alignParentTop="true"
                 android:orientation="horizontal">
 
-                <!--<RelativeLayout-->
-                    <!--android:id="@+id/mine_back"-->
-                    <!--android:layout_width="50dp"-->
-                    <!--android:layout_height="match_parent">-->
-
-                    <!--<ImageView-->
-
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentStart="true"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginStart="20dp"-->
-                        <!--android:src="@mipmap/mine_fanhui" />-->
-                <!--</RelativeLayout>-->
-
                 <RelativeLayout
                     android:id="@+id/mine_setting"
                     android:layout_width="60dp"
@@ -68,7 +53,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
-                android:src="@mipmap/mine_touxiang" />
+                android:src="@mipmap/mine_touxiang"
+                android:visibility="gone"
+                />
 
         </RelativeLayout>
 
@@ -91,7 +78,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="7dp"
                 android:layout_toRightOf="@id/mine_username"
-                android:src="@mipmap/mine_parter" />
+                android:src="@mipmap/mine_parter"
+                android:visibility="gone"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -103,8 +92,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="喜欢的格言"
-                android:textColor="@color/yellow_ffdcoo"
+                android:text="天下难事，必做于易；天下大事，必做于细"
+                android:textColor="@color/gray3"
                 android:textSize="15sp" />
         </RelativeLayout>
 
@@ -197,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="35dp"
                 android:text="@{minedatas.phone==null?``:minedatas.phone}"
                 android:textColor="@color/gray3"
                 android:textSize="14sp" />
@@ -229,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="35dp"
                 android:text="@{minedatas.location}"
                 android:textColor="@color/gray3"
                 android:textSize="14sp" />

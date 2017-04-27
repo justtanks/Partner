@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:title="合伙人"
+        android:icon="@mipmap/home_partner_not"/>
+
+    <item
+        android:id="@+id/action_qiangdan"
+        android:title="我要推广"
+        android:icon="@mipmap/home_tuiguang_not"/>
+
+    <item
+        android:id="@+id/action_me"
+        android:title="我的"
+        android:icon="@mipmap/home_mine_not"/>
+</menu>

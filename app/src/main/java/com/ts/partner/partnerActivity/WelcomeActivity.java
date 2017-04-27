@@ -122,7 +122,6 @@ public class WelcomeActivity extends BaseActivity {
                         intent.putExtra("isfresh", isFresh);
                         intent.putExtra(LoginActivity.DATAS_KEY, login);
                         startActivity(intent);
-                        WelcomeActivity.this.finish();
                         login = null;
                     } else {
                         login = null;
@@ -144,7 +143,7 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onFinished() {
-
+                WelcomeActivity.this.finish();
             }
         });
     }
